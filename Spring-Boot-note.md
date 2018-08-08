@@ -1135,7 +1135,7 @@ SpringBoot默认帮我们配置好了日志；
 SpringBoot修改日志的默认配置
 
 ```properties
-logging.level.com.atguigu=trace
+logging.level.com.aqqje=trace
 
 
 #logging.path=
@@ -1664,8 +1664,8 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
        // super.addViewControllers(registry);
-        //浏览器发送 /atguigu 请求来到 success
-        registry.addViewController("/atguigu").setViewName("success");
+        //浏览器发送 /aqqje 请求来到 success
+        registry.addViewController("/aqqje").setViewName("success");
     }
 }
 ```
@@ -1721,7 +1721,7 @@ public class MyMvcConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addViewControllers(ViewControllerRegistry registry) {
         // super.addViewControllers(registry);
-        //浏览器发送 /atguigu 请求来到 success
+        //浏览器发送 /aqqje 请求来到 success
         super.addViewControllers(registry);
         registry.addViewController("/aqqje").setViewName("success");
     }
@@ -1790,7 +1790,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
        // super.addViewControllers(registry);
-        //浏览器发送 /atguigu 请求来到 success
+        //浏览器发送 /aqqje 请求来到 success
         registry.addViewController("/aqqje").setViewName("success");
     }
 
@@ -2233,7 +2233,7 @@ insert的公共片段在div标签中
     </div>
     <div class="form-group">
         <label>Email</label>
-        <input type="email" class="form-control" placeholder="zhangsan@atguigu.com">
+        <input type="email" class="form-control" placeholder="zhangsan@aqqje.com">
     </div>
     <div class="form-group">
         <label>Gender</label><br/>
@@ -2295,7 +2295,7 @@ insert的公共片段在div标签中
     </div>
     <div class="form-group">
         <label>Email</label>
-        <input name="email" type="email" class="form-control" placeholder="zhangsan@atguigu.com" th:value="${emp!=null}?${emp.email}">
+        <input name="email" type="email" class="form-control" placeholder="zhangsan@aqqje.com" th:value="${emp!=null}?${emp.email}">
     </div>
     <div class="form-group">
         <label>Gender</label><br/>
@@ -2578,7 +2578,7 @@ public class MyErrorAttributes extends DefaultErrorAttributes {
     @Override
     public Map<String, Object> getErrorAttributes(RequestAttributes requestAttributes, boolean includeStackTrace) {
         Map<String, Object> map = super.getErrorAttributes(requestAttributes, includeStackTrace);
-        map.put("company","atguigu");
+        map.put("company","aqqje");
         return map;
     }
 }
@@ -3047,11 +3047,11 @@ EmbeddedServletContainerFactory containerFactory = getEmbeddedServletContainerFa
 
 外置的Servlet容器：外面安装Tomcat---应用war包的方式打包；
 
-### 步骤
+### A、步骤
 
-1）、必须创建一个war项目；（利用idea创建好目录结构）
+#### a、必须创建一个war项目；（利用idea创建好目录结构）
 
-2）、将嵌入式的Tomcat指定为provided；
+#### b、将嵌入式的Tomcat指定为provided；
 
 ```xml
 <dependency>
@@ -3061,7 +3061,7 @@ EmbeddedServletContainerFactory containerFactory = getEmbeddedServletContainerFa
 </dependency>
 ```
 
-3）、必须编写一个**SpringBootServletInitializer**的子类，并调用configure方法
+#### c、必须编写一个**SpringBootServletInitializer**的子类，并调用configure方法
 
 ```java
 public class ServletInitializer extends SpringBootServletInitializer {
@@ -3075,9 +3075,9 @@ public class ServletInitializer extends SpringBootServletInitializer {
 }
 ```
 
-4）、启动服务器就可以使用；
+#### d、启动服务器就可以使用；
 
-### 原理
+### B、原理
 
 jar包：执行SpringBoot主类的main方法，启动ioc容器，创建嵌入式的Servlet容器；
 
@@ -3089,33 +3089,30 @@ servlet3.0（Spring注解版）：
 
 8.2.4 Shared libraries / runtimes pluggability：
 
-规则：
+>  规则：
 
-​	1）、服务器启动（web应用启动）会创建当前web应用里面每一个jar包里面ServletContainerInitializer实例：
-
-​	2）、ServletContainerInitializer的实现放在jar包的META-INF/services文件夹下，有一个名为javax.servlet.ServletContainerInitializer的文件，内容就是ServletContainerInitializer的实现类的全类名
-
-​	3）、还可以使用@HandlesTypes，在应用启动的时候加载我们感兴趣的类；
+- 服务器启动（web应用启动）会创建当前web应用里面每一个jar包里面ServletContainerInitializer实例：
+- ServletContainerInitializer的实现放在jar包的META-INF/services文件夹下，有一个名为javax.servlet.ServletContainerInitializer的文件，内容就是ServletContainerInitializer的实现类的全类名
+- 还可以使用@HandlesTypes，在应用启动的时候加载我们感兴趣的类；
 
 
 
-流程：
+>  流程：
 
-1）、启动Tomcat
+- 1、启动Tomcat
 
-2）、org\springframework\spring-web\4.3.14.RELEASE\spring-web-4.3.14.RELEASE.jar!\META-INF\services\javax.servlet.ServletContainerInitializer：
+- 2、org\springframework\spring-web\4.3.14.RELEASE\spring-web-4.3.14.RELEASE.jar!\META-INF\services\javax.servlet.ServletContainerInitializer：
 
-Spring的web模块里面有这个文件：**org.springframework.web.SpringServletContainerInitializer**
+  Spring的web模块里面有这个文件：**org.springframework.web.SpringServletContainerInitializer**-、
 
-3）、SpringServletContainerInitializer将@HandlesTypes(WebApplicationInitializer.class)标注的所有这个类型的类都传入到onStartup方法的Set<Class<?>>；为这些WebApplicationInitializer类型的类创建实例；
+- 3、SpringServletContainerInitializer将@HandlesTypes(WebApplicationInitializer.class)标注的所有这个类型的类都传入到onStartup方法的Set<Class<?>>；为这些WebApplicationInitializer类型的类创建实例；
 
-4）、每一个WebApplicationInitializer都调用自己的onStartup；
+- 4、每一个WebApplicationInitializer都调用自己的onStartup；
 
-![](C:/Users/Administrator/Desktop/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180302221835.png)
+![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180302221835.png)
 
-5）、相当于我们的SpringBootServletInitializer的类会被创建对象，并执行onStartup方法
-
-6）、SpringBootServletInitializer实例执行onStartup的时候会createRootApplicationContext；创建容器
+- 5、相当于我们的SpringBootServletInitializer的类会被创建对象，并执行onStartup方法
+- 6、SpringBootServletInitializer实例执行onStartup的时候会createRootApplicationContext；创建容器
 
 ```java
 protected WebApplicationContext createRootApplicationContext(
@@ -3212,25 +3209,21 @@ Docker支持将软件编译成一个镜像；然后在镜像中各种软件做�
 
 运行中的这个镜像称为容器，容器启动是非常快速的。
 
-![](C:/Users/Administrator/Desktop/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145450.png)
+![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145450.png)
 
 
 
-![](C:/Users/Administrator/Desktop/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145531.png)
+![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145531.png)
 
 ## 2、核心概念
 
-docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；
+- 1、docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；
+- 2、docker客户端(Client)：连接docker主机进行操作；
+- 3、docker仓库(Registry)：用来保存各种打包好的软件镜像；
+- 4、docker镜像(Images)：软件打包好的镜像；放在docker仓库中；
+- 5、docker容器(Container)：镜像启动后的实例称为一个容器；容器是独立运行的一个或一组应用
 
-docker客户端(Client)：连接docker主机进行操作；
-
-docker仓库(Registry)：用来保存各种打包好的软件镜像；
-
-docker镜像(Images)：软件打包好的镜像；放在docker仓库中；
-
-docker容器(Container)：镜像启动后的实例称为一个容器；容器是独立运行的一个或一组应用
-
-![](C:/Users/Administrator/Desktop/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303165113.png)
+![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303165113.png)
 
 使用Docker的步骤：
 
@@ -3244,39 +3237,41 @@ docker容器(Container)：镜像启动后的实例称为一个容器；容器是
 
 ## 3、安装Docker
 
-#### 1）、安装linux虚拟机
+#### A、安装linux虚拟机
 
-​	1）、VMWare、VirtualBox（安装）；
 
-​	2）、导入虚拟机文件centos7-atguigu.ova；
 
-​	3）、双击启动linux虚拟机;使用  root/ 123456登陆
+##### a、VMWare、VirtualBox（安装）；
 
-​	4）、使用客户端连接linux服务器进行命令操作；
+##### b、导入虚拟机文件centos7-aqqje.ova；
 
-​	5）、设置虚拟机网络；
+##### c、双击启动linux虚拟机;使用  root/ 123456登陆
+
+##### d、使用客户端连接linux服务器进行命令操作；
+
+##### e、设置虚拟机网络；
 
 ​		桥接网络===选好网卡====接入网线；
 
-​	6）、设置好网络以后使用命令重启虚拟机的网络
+##### f、设置好网络以后使用命令重启虚拟机的网络
 
 ```shell
 service network restart
 ```
 
-​	7）、查看linux的ip地址
+##### g、查看linux的ip地址
 
 ```shell
 ip addr
 ```
 
-​	8）、使用客户端连接linux；
+#####  h、使用客户端连接linux；
 
-#### 2）、在linux虚拟机上安装docker
+#### B、在linux虚拟机上安装docker
 
 步骤：
 
-```shell
+```react
 1、检查内核版本，必须是3.10及以上
 uname -r
 2、安装docker
@@ -3295,7 +3290,7 @@ systemctl stop docker
 
 ## 4、Docker常用命令&操作
 
-### 1）、镜像操作
+### A、镜像操作
 
 | 操作 | 命令                                            | 说明                                                     |
 | ---- | ----------------------------------------------- | -------------------------------------------------------- |
@@ -3306,13 +3301,13 @@ systemctl stop docker
 
 https://hub.docker.com/
 
-### 2）、容器操作
+### B、容器操作
 
 软件镜像（QQ安装程序）----运行镜像----产生一个容器（正在运行的软件，运行的QQ）；
 
 步骤：
 
-```shell
+```react
 1、搜索镜像
 [root@localhost ~]# docker search tomcat
 2、拉取镜像
@@ -3348,9 +3343,9 @@ https://docs.docker.com/engine/reference/commandline/docker/
 
 
 
-### 3）、安装MySQL示例
+### C、安装MySQL示例
 
-```shell
+```react
 docker pull mysql
 ```
 
@@ -3358,7 +3353,7 @@ docker pull mysql
 
 错误的启动
 
-```shell
+```react
 [root@localhost ~]# docker run --name mysql01 -d mysql
 42f09819908bb72dd99ae19e792e0a5d03c48638421fa64cce5f8ba0f40f5846
 
@@ -3380,7 +3375,7 @@ error: database is uninitialized and password option is not specified
 
 正确的启动
 
-```shell
+```react
 [root@localhost ~]# docker run --name mysql01 -e MYSQL_ROOT_PASSWORD=123456 -d mysql
 b874c56bec49fb43024b3805ab51e9097da779f2f572c22c695305dedd684c5f
 [root@localhost ~]# docker ps
@@ -3390,7 +3385,7 @@ b874c56bec49        mysql               "docker-entrypoint.sh"   4 seconds ago  
 
 做了端口映射
 
-```shell
+```react
 [root@localhost ~]# docker run -p 3306:3306 --name mysql02 -e MYSQL_ROOT_PASSWORD=123456 -d mysql
 ad10e4bc5c6a0f61cbad43898de71d366117d120e39db651844c0e73863b9434
 [root@localhost ~]# docker ps
@@ -3402,7 +3397,7 @@ ad10e4bc5c6a        mysql               "docker-entrypoint.sh"   4 seconds ago  
 
 几个其他的高级操作
 
-```
+```react
 docker run --name mysql03 -v /conf/mysql:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
 把主机的/conf/mysql文件夹挂载到 mysqldocker容器的/etc/mysql/conf.d文件夹里面
 改mysql的配置文件就只需要把mysql配置文件放在自定义的文件夹下（/conf/mysql）
@@ -3451,16 +3446,16 @@ spring:
 
 org.springframework.boot.autoconfigure.jdbc：
 
-1、参考DataSourceConfiguration，根据配置创建数据源，默认使用Tomcat连接池；可以使用spring.datasource.type指定自定义的数据源类型；
+#### A、参考DataSourceConfiguration，根据配置创建数据源，默认使用Tomcat连接池；可以使用spring.datasource.type指定自定义的数据源类型；
 
-2、SpringBoot默认可以支持；
+#### B、SpringBoot默认可以支持；
 
 ```
 org.apache.tomcat.jdbc.pool.DataSource、HikariDataSource、BasicDataSource、
 
 ```
 
-3、自定义数据源类型
+#### C、自定义数据源类型
 
 ```java
 /**
@@ -3479,13 +3474,13 @@ static class Generic {
 }
 ```
 
-4、**DataSourceInitializer：ApplicationListener**；
+#### D、**DataSourceInitializer：ApplicationListener**；
 
-​	作用：
+> 作用：
 
-​		1）、runSchemaScripts();运行建表语句；
+- 1、runSchemaScripts();运行建表语句；
 
-​		2）、runDataScripts();运行插入数据的sql语句；
+- 2、runDataScripts();运行插入数据的sql语句；
 
 默认只需要将文件命名为：
 
@@ -3498,7 +3493,7 @@ schema-*.sql、data-*.sql
       指定位置
 ```
 
-5、操作数据库：自动配置了JdbcTemplate操作数据库
+#### E、操作数据库：自动配置了JdbcTemplate操作数据库
 
 ## 2、整合Druid数据源
 
@@ -3559,17 +3554,17 @@ public class DruidConfig {
 		</dependency>
 ```
 
-![](C:/Users/Administrator/Desktop/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180305194443.png)
+![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180305194443.png)
 
-步骤：
+>  步骤：
 
-​	1）、配置数据源相关属性（见上一节Druid）
+- 1、配置数据源相关属性（见上一节Druid）
 
-​	2）、给数据库建表
+- 2、给数据库建表
 
-​	3）、创建JavaBean
+- 3、创建JavaBean
 
-### 4）、注解版
+### A、注解版
 
 ```java
 //指定这是一个操作数据库的mapper
@@ -3616,7 +3611,7 @@ public class MyBatisConfig {
 
 ```java
 使用MapperScan批量扫描所有的Mapper接口；
-@MapperScan(value = "com.atguigu.springboot.mapper")
+@MapperScan(value = "com.aqqje.springboot.mapper")
 @SpringBootApplication
 public class SpringBoot06DataMybatisApplication {
 
@@ -3626,7 +3621,7 @@ public class SpringBoot06DataMybatisApplication {
 }
 ```
 
-### 5）、配置文件版
+### B、配置文件版
 
 ```yaml
 mybatis:
@@ -3642,11 +3637,11 @@ http://www.mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/
 
 ## 4、整合SpringData JPA
 
-### 1）、SpringData简介
+### A、SpringData简介
 
-![](C:/Users/Administrator/Desktop/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180306105412.png)
+![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180306105412.png)
 
-### 2）、整合SpringData JPA
+### B、整合SpringData JPA
 
 JPA:ORM（Object Relational Mapping）；
 
@@ -3693,21 +3688,17 @@ spring:
 
 # 七、启动配置原理
 
-几个重要的事件回调机制
+>  几个重要的事件回调机制
 
-配置在META-INF/spring.factories
-
-**ApplicationContextInitializer**
-
-**SpringApplicationRunListener**
+- 1、配置在META-INF/spring.factories
+  - **ApplicationContextInitializer**
+  - *SpringApplicationRunListener**
 
 
 
-只需要放在ioc容器中
-
-**ApplicationRunner**
-
-**CommandLineRunner**
+- 2、只需要放在ioc容器中
+  - **ApplicationRunner**
+  - **CommandLineRunner**
 
 
 
@@ -3734,9 +3725,9 @@ private void initialize(Object[] sources) {
 }
 ```
 
-![](C:/Users/Administrator/Desktop/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180306145727.png)
+![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180306145727.png)
 
-![](C:/Users/Administrator/Desktop/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180306145855.png)
+![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180306145855.png)
 
 ## 2、运行run方法
 
@@ -3857,10 +3848,10 @@ public class HelloSpringApplicationRunListener implements SpringApplicationRunLi
 
 ```properties
 org.springframework.context.ApplicationContextInitializer=\
-com.atguigu.springboot.listener.HelloApplicationContextInitializer
+com.aqqje.springboot.listener.HelloApplicationContextInitializer
 
 org.springframework.boot.SpringApplicationRunListener=\
-com.atguigu.springboot.listener.HelloSpringApplicationRunListener
+com.aqqje.springboot.listener.HelloSpringApplicationRunListener
 ```
 
 
@@ -3944,8 +3935,8 @@ mybatis-spring-boot-starter；自定义启动器名-spring-boot-starter
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.atguigu.starter</groupId>
-    <artifactId>atguigu-spring-boot-starter</artifactId>
+    <groupId>com.aqqje.starter</groupId>
+    <artifactId>aqqje-spring-boot-starter</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <!--启动器-->
@@ -3953,8 +3944,8 @@ mybatis-spring-boot-starter；自定义启动器名-spring-boot-starter
 
         <!--引入自动配置模块-->
         <dependency>
-            <groupId>com.atguigu.starter</groupId>
-            <artifactId>atguigu-spring-boot-starter-autoconfigurer</artifactId>
+            <groupId>com.aqqje.starter</groupId>
+            <artifactId>aqqje-spring-boot-starter-autoconfigurer</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
@@ -3970,12 +3961,12 @@ mybatis-spring-boot-starter；自定义启动器名-spring-boot-starter
    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
    <modelVersion>4.0.0</modelVersion>
 
-   <groupId>com.atguigu.starter</groupId>
-   <artifactId>atguigu-spring-boot-starter-autoconfigurer</artifactId>
+   <groupId>com.aqqje.starter</groupId>
+   <artifactId>aqqje-spring-boot-starter-autoconfigurer</artifactId>
    <version>0.0.1-SNAPSHOT</version>
    <packaging>jar</packaging>
 
-   <name>atguigu-spring-boot-starter-autoconfigurer</name>
+   <name>aqqje-spring-boot-starter-autoconfigurer</name>
    <description>Demo project for Spring Boot</description>
 
    <parent>
@@ -4010,11 +4001,11 @@ mybatis-spring-boot-starter；自定义启动器名-spring-boot-starter
 
 
 ```java
-package com.atguigu.starter;
+package com.aqqje.starter;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "atguigu.hello")
+@ConfigurationProperties(prefix = "aqqje.hello")
 public class HelloProperties {
 
     private String prefix;
@@ -4040,7 +4031,7 @@ public class HelloProperties {
 ```
 
 ```java
-package com.atguigu.starter;
+package com.aqqje.starter;
 
 public class HelloService {
 
@@ -4054,7 +4045,7 @@ public class HelloService {
         this.helloProperties = helloProperties;
     }
 
-    public String sayHellAtguigu(String name){
+    public String sayHellaqqje(String name){
         return helloProperties.getPrefix()+"-" +name + helloProperties.getSuffix();
     }
 }
@@ -4062,7 +4053,7 @@ public class HelloService {
 ```
 
 ```java
-package com.atguigu.starter;
+package com.aqqje.starter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
