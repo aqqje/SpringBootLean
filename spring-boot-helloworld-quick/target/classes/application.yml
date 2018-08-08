@@ -1,0 +1,24 @@
+server:
+  port: 8081
+spring:
+  profiles:
+    active: dev
+---
+server:
+  port: 11
+spring:
+  profiles: dev
+---
+server:
+  port: 7021
+spring:
+  profiles: prod
+#person:
+#  age: 20
+#  boss: true
+#  data: 2018/7/29
+#  map: {k1: v1, k2: v2}
+#  list: [AQQJE, LIULI, WLN]
+#  dog:
+#    name: xq
+#    age: 2

@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    #   数据源基本配置
+    username: root
+    password: my-secret-pw
+    url: jdbc:mysql://192.168.99.100:3306/mybaties
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+#    创建与更新
+      ddl-auto: update
+#      控制台显示sql
+    show-sql: true

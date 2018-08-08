@@ -1,0 +1,17 @@
+2018-07-29 19:02:47.782  INFO 6080 --- [main] c.aqqje.logging.LoggingApplicationTests  : Starting LoggingApplicationTests on LIULI with PID 6080 (started by Administrator in E:\github\SpringBootLean\logging)
+2018-07-29 19:02:47.787 DEBUG 6080 --- [main] c.aqqje.logging.LoggingApplicationTests  : Running with Spring Boot v2.0.3.RELEASE, Spring v5.0.7.RELEASE
+2018-07-29 19:02:47.791  INFO 6080 --- [main] c.aqqje.logging.LoggingApplicationTests  : No active profile set, falling back to default profiles: default
+2018-07-29 19:02:47.880  INFO 6080 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@5778826f: startup date [Sun Jul 29 19:02:47 CST 2018]; root of context hierarchy
+2018-07-29 19:02:51.172  INFO 6080 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-29 19:02:51.799  INFO 6080 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@5778826f: startup date [Sun Jul 29 19:02:47 CST 2018]; root of context hierarchy
+2018-07-29 19:02:51.999  INFO 6080 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-29 19:02:52.003  INFO 6080 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-29 19:02:52.086  INFO 6080 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-29 19:02:52.087  INFO 6080 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-29 19:02:52.731  INFO 6080 --- [main] c.aqqje.logging.LoggingApplicationTests  : Started LoggingApplicationTests in 5.856 seconds (JVM running for 10.548)
+2018-07-29 19:02:53.004 TRACE 6080 --- [main] c.aqqje.logging.LoggingApplicationTests  : 这是trace日志
+2018-07-29 19:02:53.005 DEBUG 6080 --- [main] c.aqqje.logging.LoggingApplicationTests  : 这是debug日志
+2018-07-29 19:02:53.005  INFO 6080 --- [main] c.aqqje.logging.LoggingApplicationTests  : 这是info日志
+2018-07-29 19:02:53.005  WARN 6080 --- [main] c.aqqje.logging.LoggingApplicationTests  : 这是warn日志
+2018-07-29 19:02:53.005 ERROR 6080 --- [main] c.aqqje.logging.LoggingApplicationTests  : 这是error日志
+2018-07-29 19:02:53.016  INFO 6080 --- [Thread-2] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@5778826f: startup date [Sun Jul 29 19:02:47 CST 2018]; root of context hierarchy
