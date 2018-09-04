@@ -2,6 +2,8 @@
 
 
 
+
+
 # 一、Spring Boot 入门
 
 ## 1、 Spring Boot 简介
@@ -158,7 +160,7 @@ Spring Boot的版本仲裁中心；
 
 **spring-boot-starter**-***web***：
 
-​	spring-boot-starter：spring-boot场景启动器；帮我们导入了web模块正常运行所依赖的组件；
+	spring-boot-starter：spring-boot场景启动器；帮我们导入了web模块正常运行所依赖的组件；
 
 
 
@@ -201,17 +203,17 @@ public @interface SpringBootApplication {
 
 @**SpringBootConfiguration**:Spring Boot的配置类；
 
-​		标注在某个类上，表示这是一个Spring Boot的配置类；
+		标注在某个类上，表示这是一个Spring Boot的配置类；
 
-​		@**Configuration**:配置类上来标注这个注解；
+		@**Configuration**:配置类上来标注这个注解；
 
-​			配置类 -----  配置文件；配置类也是容器中的一个组件；@Component
+			配置类 -----  配置文件；配置类也是容器中的一个组件；@Component
 
 
 
 @**EnableAutoConfiguration**：开启自动配置功能；
 
-​		以前我们需要配置的东西，Spring Boot帮我们自动配置；@**EnableAutoConfiguration**告诉SpringBoot开启自动配置功能；这样自动配置才能生效；
+		以前我们需要配置的东西，Spring Boot帮我们自动配置；@**EnableAutoConfiguration**告诉SpringBoot开启自动配置功能；这样自动配置才能生效；
 
 ```java
 @AutoConfigurationPackage
@@ -219,27 +221,27 @@ public @interface SpringBootApplication {
 public @interface EnableAutoConfiguration {
 ```
 
-​      	@**AutoConfigurationPackage**：自动配置包
+      	@**AutoConfigurationPackage**：自动配置包
 
-​		@**Import**(AutoConfigurationPackages.Registrar.class)：
+		@**Import**(AutoConfigurationPackages.Registrar.class)：
 
-​		Spring的底层注解@Import，给容器中导入一个组件；导入的组件由AutoConfigurationPackages.Registrar.class；
+		Spring的底层注解@Import，给容器中导入一个组件；导入的组件由AutoConfigurationPackages.Registrar.class；
 
 ==将主配置类（@SpringBootApplication标注的类）的所在包及下面所有子包里面的所有组件扫描到Spring容器；==
 
-​	@**Import**(EnableAutoConfigurationImportSelector.class)；
+	@**Import**(EnableAutoConfigurationImportSelector.class)；
 
-​		给容器中导入组件？
+		给容器中导入组件？
 
-​		**EnableAutoConfigurationImportSelector**：导入哪些组件的选择器；
+		**EnableAutoConfigurationImportSelector**：导入哪些组件的选择器；
 
-​		将所有需要导入的组件以全类名的方式返回；这些组件就会被添加到容器中；
+		将所有需要导入的组件以全类名的方式返回；这些组件就会被添加到容器中；
 
-​		会给容器中导入非常多的自动配置类（xxxAutoConfiguration）；就是给容器中导入这个场景需要的所有组件，并配置好这些组件；	
+		会给容器中导入非常多的自动配置类（xxxAutoConfiguration）；就是给容器中导入这个场景需要的所有组件，并配置好这些组件；	
 
 有了自动配置类，免去了我们手动编写配置注入功能组件等的工作；
 
-​		SpringFactoriesLoader.loadFactoryNames(EnableAutoConfiguration.class,classLoader)；
+		SpringFactoriesLoader.loadFactoryNames(EnableAutoConfiguration.class,classLoader)；
 
 
 
@@ -287,24 +289,24 @@ SpringBoot使用一个全局的配置文件，配置文件名是固定的；
 
 YAML（YAML Ain't Markup Language）
 
-​	YAML  A Markup Language：是一个标记语言
+	YAML  A Markup Language：是一个标记语言
 
-​	YAML   isn't Markup Language：不是一个标记语言；
+	YAML   isn't Markup Language：不是一个标记语言；
 
 标记语言：
 
-​	以前的配置文件；大多都使用的是  **xxxx.xml**文件；
+	以前的配置文件；大多都使用的是  **xxxx.xml**文件；
 
-​	YAML：**以数据为中心**，比json、xml等更适合做配置文件；
+	YAML：**以数据为中心**，比json、xml等更适合做配置文件；
 
-​	YAML：配置例子
+	YAML：配置例子
 
 ```yaml
 server:
   port: 8081
 ```
 
-​	XML：
+	XML：
 
 ```xml
 <server>
@@ -334,25 +336,25 @@ server:
 
 #### a、字面量：普通的值（数字，字符串，布尔）
 
-​	k: v：字面直接来写；
+	k: v：字面直接来写；
 
-​		字符串默认不用加上单引号或者双引号；
+		字符串默认不用加上单引号或者双引号；
 
-​		""：双引号；不会转义字符串里面的特殊字符；特殊字符会作为本身想表示的意思
+		""：双引号；不会转义字符串里面的特殊字符；特殊字符会作为本身想表示的意思
 
-​				name:   "zhangsan \n lisi"：输出；zhangsan 换行  lisi
+				name:   "zhangsan \n lisi"：输出；zhangsan 换行  lisi
 
-​		''：单引号；会转义特殊字符，特殊字符最终只是一个普通的字符串数据
+		''：单引号；会转义特殊字符，特殊字符最终只是一个普通的字符串数据
 
-​				name:   ‘zhangsan \n lisi’：输出；zhangsan \n  lisi
+				name:   ‘zhangsan \n lisi’：输出；zhangsan \n  lisi
 
 
 
 #### b、对象、Map（属性和值）（键值对）：
 
-​	k: v：在下一行来写对象的属性和值的关系；注意缩进
+	k: v：在下一行来写对象的属性和值的关系；注意缩进
 
-​		对象还是k: v的方式
+		对象还是k: v的方式
 
 ```yaml
 friends:
@@ -595,13 +597,13 @@ spring:
 >
 > 2、命令行：
 >
-> ​	java -jar spring-boot-02-config-0.0.1-SNAPSHOT.jar --			spring.profiles.active=dev；
+> 	java -jar spring-boot-02-config-0.0.1-SNAPSHOT.jar --			spring.profiles.active=dev；
 >
-> ​	可以直接在测试的时候，配置传入命令行参数
+> 	可以直接在测试的时候，配置传入命令行参数
 >
 > 3、虚拟机参数；
 >
-> ​	 -Dspring.profiles.active=dev
+> 	 -Dspring.profiles.active=dev
 
 ## 6、配置文件加载位置
 
@@ -892,7 +894,7 @@ public class HttpEncodingProperties {
 
 #### 	A、@Conditional派生注解（Spring注解版原生的@Conditional作用）
 
-​	作用：必须是@Conditional指定的条件成立，才给容器中添加组件，配置配里面的所有内容才生效；	
+	作用：必须是@Conditional指定的条件成立，才给容器中添加组件，配置配里面的所有内容才生效；	
 
 | @Conditional扩展注解            | 作用（判断是否满足当前指定条件）                 |
 | ------------------------------- | ------------------------------------------------ |
@@ -958,13 +960,13 @@ Negative matches:（没有启动，没有匹配成功的自动配置类）
 >
 > 5、JDBC---数据库驱动；
 >
-> ​		写了一个统一的接口层；日志门面（日志的一个抽象层）；logging-abstract.jar；
+> 		写了一个统一的接口层；日志门面（日志的一个抽象层）；logging-abstract.jar；
 >
-> ​		给项目中导入具体的日志实现就行了；我们之前的日志框架都是实现的抽象层；
+> 		给项目中导入具体的日志实现就行了；我们之前的日志框架都是实现的抽象层；
 >
 > 
 
-​		
+		
 
 **市面上的日志框架；**
 
@@ -984,7 +986,7 @@ JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j....
 
 SpringBoot：底层是Spring框架，Spring框架默认是用JCL；‘
 
-​	**SpringBoot选用 SLF4j和logback**
+	**SpringBoot选用 SLF4j和logback**
 
 
 
@@ -1020,7 +1022,7 @@ public class HelloWorld {
 
 #### 	a、（slf4j+logback）: Spring（commons-logging）、Hibernate（jboss-logging）、MyBatis、xxxx 
 
-​	***统一日志记录，即使是别的框架和我一起统一使用slf4j进行输出？***
+	***统一日志记录，即使是别的框架和我一起统一使用slf4j进行输出？***
 
 ![](https://www.slf4j.org/images/legacy.png)  
 
@@ -1054,11 +1056,11 @@ SpringBoot使用它来做日志功能；
 
 总结：
 
-​	1）、SpringBoot底层也是使用slf4j+logback的方式进行日志记录
+	1）、SpringBoot底层也是使用slf4j+logback的方式进行日志记录
 
-​	2）、SpringBoot也把其他的日志都替换成了slf4j；
+	2）、SpringBoot也把其他的日志都替换成了slf4j；
 
-​	3）、中间替换包？
+	3）、中间替换包？
 
 ```java
 @SuppressWarnings("rawtypes")
@@ -1071,9 +1073,9 @@ public abstract class LogFactory {
 
 
 
-​	4）、如果我们要引入其他框架？一定要把这个框架的默认日志依赖移除掉？
+	4）、如果我们要引入其他框架？一定要把这个框架的默认日志依赖移除掉？
 
-​			Spring框架用的是commons-logging；
+			Spring框架用的是commons-logging；
 
 ```xml
 		<dependency>
@@ -1374,7 +1376,7 @@ public class ResourceProperties implements ResourceLoaderAware {
 
 ==1）、所有 /webjars/** ，都去 classpath:/META-INF/resources/webjars/ 找资源；==
 
-​	webjars：以jar包的方式引入静态资源；
+	webjars：以jar包的方式引入静态资源；
 
 http://www.webjars.org/
 
@@ -1407,7 +1409,7 @@ localhost:8080/abc ===  去静态资源文件夹里面找abc
 
 ==3）、欢迎页； 静态资源文件夹下的所有index.html页面；被"/**"映射；==
 
-​	localhost:8080/   找index页面
+	localhost:8080/   找index页面
 
 ==4）、所有的 **/favicon.ico  都是在静态资源文件下找；==
 
@@ -1493,7 +1495,7 @@ public class ThymeleafProperties {
 
 #### a、th:text；改变当前元素里面的文本内容；
 
-​	th：任意html属性；来替换原生属性的值
+	th：任意html属性；来替换原生属性的值
 
 ![](/images/2018-02-04_123955.png)
 
@@ -1610,7 +1612,7 @@ Spring Boot 自动配置好了SpringMVC
 		}
 ```
 
-​	==自己添加的格式化器转换器，我们只需要放在容器中即可==
+	==自己添加的格式化器转换器，我们只需要放在容器中即可==
 
 - Support for `HttpMessageConverters` (see below).
 
@@ -1672,9 +1674,9 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
 
 原理：
 
-​	1）、WebMvcAutoConfiguration是SpringMVC的自动配置类
+	1）、WebMvcAutoConfiguration是SpringMVC的自动配置类
 
-​	2）、在做其他自动配置时会导入；@Import(**EnableWebMvcConfiguration**.class)
+	2）、在做其他自动配置时会导入；@Import(**EnableWebMvcConfiguration**.class)
 
 ```java
     @Configuration
@@ -1697,11 +1699,11 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
 	}
 ```
 
-​	3）、容器中所有的WebMvcConfigurer都会一起起作用；
+	3）、容器中所有的WebMvcConfigurer都会一起起作用；
 
-​	4）、我们的配置类也会被调用；
+	4）、我们的配置类也会被调用；
 
-​	效果：SpringMVC的自动配置和我们的扩展配置都会起作用；
+	效果：SpringMVC的自动配置和我们的扩展配置都会起作用；
 
 ### C、全面接管SpringMVC；
 
@@ -1771,11 +1773,11 @@ public class WebMvcAutoConfiguration {
 
 模式：
 
-​	1）、SpringBoot在自动配置很多组件的时候，先看容器中有没有用户自己配置的（@Bean、@Component）如果有就用用户配置的，如果没有，才自动配置；如果有些组件可以有多个（ViewResolver）将用户配置的和自己默认的组合起来；
+	1）、SpringBoot在自动配置很多组件的时候，先看容器中有没有用户自己配置的（@Bean、@Component）如果有就用用户配置的，如果没有，才自动配置；如果有些组件可以有多个（ViewResolver）将用户配置的和自己默认的组合起来；
 
-​	2）、在SpringBoot中会有非常多的xxxConfigurer帮助我们进行扩展配置
+	2）、在SpringBoot中会有非常多的xxxConfigurer帮助我们进行扩展配置
 
-​	3）、在SpringBoot中会有很多的xxxCustomizer帮助我们进行定制配置
+	3）、在SpringBoot中会有很多的xxxCustomizer帮助我们进行定制配置
 
 ## 6、RestfulCRUD
 
@@ -1924,7 +1926,7 @@ d、去页面获取国际化的值；
 
 原理：
 
-​	国际化Locale（区域信息对象）；LocaleResolver（获取区域信息对象）；
+	国际化Locale（区域信息对象）；LocaleResolver（获取区域信息对象）；
 
 ```java
 		@Bean
@@ -2357,7 +2359,7 @@ insert的公共片段在div标签中
 
 默认效果：
 
-​		1）、浏览器，返回一个默认的错误页面
+		1）、浏览器，返回一个默认的错误页面
 
 ![](/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180226173408.png)
 
@@ -2365,21 +2367,21 @@ insert的公共片段在div标签中
 
 ![](/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180226180347.png)
 
-​		2）、如果是其他客户端，默认响应一个json数据
+		2）、如果是其他客户端，默认响应一个json数据
 
 ![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180226173527.png)
 
-​	
+	
 
 ![](images/搜狗截图20180226180504.png)
 
 原理：
 
-​	可以参照ErrorMvcAutoConfiguration；错误处理的自动配置；
+	可以参照ErrorMvcAutoConfiguration；错误处理的自动配置；
 
   	给容器中添加了以下组件
 
-​	1、DefaultErrorAttributes：
+	1、DefaultErrorAttributes：
 
 ```java
 帮我们在页面共享信息；
@@ -2397,7 +2399,7 @@ insert的公共片段在div标签中
 
 
 
-​	2、BasicErrorController：处理默认/error请求
+	2、BasicErrorController：处理默认/error请求
 
 ```java
 @Controller
@@ -2429,7 +2431,7 @@ public class BasicErrorController extends AbstractErrorController {
 
 
 
-​	3、ErrorPageCustomizer：
+	3、ErrorPageCustomizer：
 
 ```java
 	@Value("${error.path:/error}")
@@ -2438,7 +2440,7 @@ public class BasicErrorController extends AbstractErrorController {
 
 
 
-​	4、DefaultErrorViewResolver：
+	4、DefaultErrorViewResolver：
 
 ```java
 @Override
@@ -2469,11 +2471,11 @@ public class BasicErrorController extends AbstractErrorController {
 
 
 
-​	步骤：
+	步骤：
 
-​		一但系统出现4xx或者5xx之类的错误；ErrorPageCustomizer就会生效（定制错误的响应规则）；就会来到/error请求；就会被**BasicErrorController**处理；
+		一但系统出现4xx或者5xx之类的错误；ErrorPageCustomizer就会生效（定制错误的响应规则）；就会来到/error请求；就会被**BasicErrorController**处理；
 
-​		1）响应页面；去哪个页面是由**DefaultErrorViewResolver**解析得到的；
+		1）响应页面；去哪个页面是由**DefaultErrorViewResolver**解析得到的；
 
 ```java
 protected ModelAndView resolveErrorView(HttpServletRequest request,
@@ -2493,33 +2495,33 @@ protected ModelAndView resolveErrorView(HttpServletRequest request,
 
 #### a、如何定制错误的页面；**
 
-​			**1）、有模板引擎的情况下；error/状态码;** 【将错误页面命名为  错误状态码.html 放在模板引擎文件夹里面的 error文件夹下】，发生此状态码的错误就会来到  对应的页面；
+			**1）、有模板引擎的情况下；error/状态码;** 【将错误页面命名为  错误状态码.html 放在模板引擎文件夹里面的 error文件夹下】，发生此状态码的错误就会来到  对应的页面；
 
-​			我们可以使用4xx和5xx作为错误页面的文件名来匹配这种类型的所有错误，精确优先（优先寻找精确的状态码.html）；		
+			我们可以使用4xx和5xx作为错误页面的文件名来匹配这种类型的所有错误，精确优先（优先寻找精确的状态码.html）；		
 
-​			页面能获取的信息；
+			页面能获取的信息；
 
-​				timestamp：时间戳
+				timestamp：时间戳
 
-​				status：状态码
+				status：状态码
 
-​				error：错误提示
+				error：错误提示
 
-​				exception：异常对象
+				exception：异常对象
 
-​				message：异常消息
+				message：异常消息
 
-​				errors：JSR303数据校验的错误都在这里
+				errors：JSR303数据校验的错误都在这里
 
-​			2）、没有模板引擎（模板引擎找不到这个错误页面），静态资源文件夹下找；
+			2）、没有模板引擎（模板引擎找不到这个错误页面），静态资源文件夹下找；
 
-​			3）、以上都没有错误页面，就是默认来到SpringBoot默认的错误提示页面；
+			3）、以上都没有错误页面，就是默认来到SpringBoot默认的错误提示页面；
 
 
 
 #### b、如何定制错误的json数据；
 
-​		1）、自定义异常处理&返回定制json数据；
+		1）、自定义异常处理&返回定制json数据；
 
 ```java
 @ControllerAdvice
@@ -2539,7 +2541,7 @@ public class MyExceptionHandler {
 
 
 
-​		2）、转发到/error进行自适应响应效果处理
+		2）、转发到/error进行自适应响应效果处理
 
 ```java
  @ExceptionHandler(UserNotExistException.class)
@@ -2562,11 +2564,11 @@ public class MyExceptionHandler {
 
 出现错误以后，会来到/error请求，会被BasicErrorController处理，响应出去可以获取的数据是由getErrorAttributes得到的（是AbstractErrorController（ErrorController）规定的方法）；
 
-​	1、完全来编写一个ErrorController的实现类【或者是编写AbstractErrorController的子类】，放在容器中；
+	1、完全来编写一个ErrorController的实现类【或者是编写AbstractErrorController的子类】，放在容器中；
 
-​	2、页面上能用的数据，或者是json返回能用的数据都是通过errorAttributes.getErrorAttributes得到；
+	2、页面上能用的数据，或者是json返回能用的数据都是通过errorAttributes.getErrorAttributes得到；
 
-​			容器中DefaultErrorAttributes.getErrorAttributes()；默认进行数据处理的；
+			容器中DefaultErrorAttributes.getErrorAttributes()；默认进行数据处理的；
 
 自定义ErrorAttributes
 
@@ -3023,7 +3025,7 @@ public void refresh() throws BeansException, IllegalStateException {
 
 EmbeddedServletContainerFactory containerFactory = getEmbeddedServletContainerFactory();
 
-​	从ioc容器中获取EmbeddedServletContainerFactory 组件；**TomcatEmbeddedServletContainerFactory**创建对象，后置处理器一看是这个对象，就获取所有的定制器来先定制Servlet容器的相关配置；
+	从ioc容器中获取EmbeddedServletContainerFactory 组件；**TomcatEmbeddedServletContainerFactory**创建对象，后置处理器一看是这个对象，就获取所有的定制器来先定制Servlet容器的相关配置；
 
 7）、**使用容器工厂获取嵌入式的Servlet容器**：this.embeddedServletContainer = containerFactory      .getEmbeddedServletContainer(getSelfInitializer());
 
@@ -3039,9 +3041,9 @@ EmbeddedServletContainerFactory containerFactory = getEmbeddedServletContainerFa
 
 嵌入式Servlet容器：应用打成可执行的jar
 
-​		优点：简单、便携；
+		优点：简单、便携；
 
-​		缺点：默认不支持JSP、优化定制比较复杂（使用定制器【ServerProperties、自定义EmbeddedServletContainerCustomizer】，自己编写嵌入式Servlet容器的创建工厂【EmbeddedServletContainerFactory】）；
+		缺点：默认不支持JSP、优化定制比较复杂（使用定制器【ServerProperties、自定义EmbeddedServletContainerCustomizer】，自己编写嵌入式Servlet容器的创建工厂【EmbeddedServletContainerFactory】）；
 
 
 
@@ -3251,7 +3253,7 @@ Docker支持将软件编译成一个镜像；然后在镜像中各种软件做�
 
 ##### e、设置虚拟机网络；
 
-​		桥接网络===选好网卡====接入网线；
+		桥接网络===选好网卡====接入网线；
 
 ##### f、设置好网络以后使用命令重启虚拟机的网络
 
@@ -3438,9 +3440,9 @@ spring:
 
 效果：
 
-​	默认是用org.apache.tomcat.jdbc.pool.DataSource作为数据源；
+	默认是用org.apache.tomcat.jdbc.pool.DataSource作为数据源；
 
-​	数据源的相关配置都在DataSourceProperties里面；
+	数据源的相关配置都在DataSourceProperties里面；
 
 自动配置原理：
 
@@ -3892,9 +3894,9 @@ public class HelloCommandLineRunner implements CommandLineRunner {
 
 starter：
 
-​	1、这个场景需要使用到的依赖是什么？
+	1、这个场景需要使用到的依赖是什么？
 
-​	2、如何编写自动配置
+	2、如何编写自动配置
 
 ```java
 @Configuration  //指定这个类是一个配置类
@@ -3912,7 +3914,7 @@ org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfig
 org.springframework.boot.autoconfigure.aop.AopAutoConfiguration,\
 ```
 
-​	3、模式：
+	3、模式：
 
 启动器只用来做依赖导入；
 
@@ -4078,6 +4080,692 @@ public class HelloServiceAutoConfiguration {
 
 ```
 
+# 九、Spring Boot与缓存 
+
+## 1、简介
+
+
+
+> - 1、Spring从3.1开始定义了org.springframework.cache.Cache和org.springframework.cache.CacheManager接口来统一不同的缓存技术；并支持使用JCache（JSR-107）注解简化我们开发； 
+> - 2、Cache接口为缓存的组件规范定义，包含缓存的各种操作集合；
+> - 3、Cache接口下Spring提供了各种xxxCache的实现；如RedisCache，EhCacheCache , ConcurrentMapCache等；
+
+![](/images/搜狗截图20180809230305.png)
+
+
+
+## 2、几个重要概念&缓存注解 
+
+| Cache          | 缓存接口，定义缓存操作。实现有：RedisCache、EhCacheCache、ConcurrentMapCache等 |
+| -------------- | ------------------------------------------------------------ |
+| CacheManager   | 缓存管理器，管理各种缓存（Cache）组件                        |
+| @Cacheable     | 主要针对方法配置，能够根据方法的请求参数对其结果进行缓存     |
+| @CacheEvict    | 清空缓存                                                     |
+| @CachePut      | 保证方法被调用，又希望结果被缓存。                           |
+| @EnableCaching | 开启基于注解的缓存                                           |
+| keyGenerator   | 缓存数据时key生成策略                                        |
+| serialize      | 缓存数据时value序列化策略                                    |
+
+
+
+![](images/搜狗截图20180810001615.png)
+
+## 3、Cache SpEL available metadata 
+
+| 名字          | 位置               | 描述                                                         | 示例                 |
+| ------------- | ------------------ | ------------------------------------------------------------ | -------------------- |
+| methodName    | root object        | 当前被调用的方法名                                           | #root.methodName     |
+| method        | root object        | 当前被调用的方法                                             | #root.method.name    |
+| target        | root object        | 当前被调用的目标对象                                         | #root.target         |
+| targetClass   | root object        | 当前被调用的目标对象类                                       | #root.targetClass    |
+| args          | root object        | 当前被调用的方法的参数列表                                   | #root.args[0]        |
+| caches        | root object        | 当前方法调用使用的缓存列表（如@Cacheable(value={"cache1",   "cache2"})），则有两个cache | #root.caches[0].name |
+| argument name | evaluation context | 方法参数的名字. 可以直接 #参数名 ，也可以使用 #p0或#a0 的形式，0代表参数的索引； | #iban 、 #a0 、  #p0 |
+| result        | evaluation context | 方法执行后的返回值（仅当方法执行之后的判断有效，如‘unless’，’cache put’的表达式 ’cache evict’的表达式beforeInvocation=false） | #result              |
+
+
+
+## 4.初体验
+
+> - 1、引入spring-boot-starter-cache模块
+> - 2、@EnableCaching开启缓存
+> - 3、使用缓存注解
+> - 4、切换为其他缓存
+
+
+
+
+
+```java
+
+ ===============SpringBootCacheApplication.java============
+
+@MapperScan("com.aqqje.cache.mapper")
+@EnableCaching // 开启缓存
+@SpringBootApplication
+public class SpringBootCacheApplication {
+    
+    
+================EmployeeService.java===================
+
+package com.aqqje.cache.service;
+
+import com.aqqje.cache.bean.Employee;
+import com.aqqje.cache.mapper.EmployeeMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.*;
+import org.springframework.stereotype.Service;
+
+@Service
+@CacheConfig(cacheNames="emp"/*,cacheManager = "employeeCacheManager"*/) //抽取缓存的公共配置
+public class EmployeeService {
+
+    @Autowired
+    EmployeeMapper employeeMapper;
+
+    // 查询
+
+    /**
+     * 将方法的运行结果进行缓存；以后再要相同的数据，直接从缓存中获取，不用调用方法；
+     * CacheManager管理多个Cache组件的，对缓存的真正CRUD操作在Cache组件中，每一个缓存组件有自己唯一一个名字；
+     *
+
+     *
+     * 原理：
+     *   1、自动配置类；CacheAutoConfiguration
+     *   2、缓存的配置类
+     *   org.springframework.boot.autoconfigure.cache.GenericCacheConfiguration
+     *   org.springframework.boot.autoconfigure.cache.JCacheCacheConfiguration
+     *   org.springframework.boot.autoconfigure.cache.EhCacheCacheConfiguration
+     *   org.springframework.boot.autoconfigure.cache.HazelcastCacheConfiguration
+     *   org.springframework.boot.autoconfigure.cache.InfinispanCacheConfiguration
+     *   org.springframework.boot.autoconfigure.cache.CouchbaseCacheConfiguration
+     *   org.springframework.boot.autoconfigure.cache.RedisCacheConfiguration
+     *   org.springframework.boot.autoconfigure.cache.CaffeineCacheConfiguration
+     *   org.springframework.boot.autoconfigure.cache.GuavaCacheConfiguration
+     *   org.springframework.boot.autoconfigure.cache.SimpleCacheConfiguration【默认】
+     *   org.springframework.boot.autoconfigure.cache.NoOpCacheConfiguration
+     *   3、哪个配置类默认生效：SimpleCacheConfiguration；
+     *
+     *   4、给容器中注册了一个CacheManager：ConcurrentMapCacheManager
+     *   5、可以获取和创建ConcurrentMapCache类型的缓存组件；他的作用将数据保存在ConcurrentMap中；
+     *
+     *   运行流程：
+     *   @Cacheable：
+     *   1、方法运行之前，先去查询Cache（缓存组件），按照cacheNames指定的名字获取；
+     *      （CacheManager先获取相应的缓存），第一次获取缓存如果没有Cache组件会自动创建。
+     *   2、去Cache中查找缓存的内容，使用一个key，默认就是方法的参数；
+     *      key是按照某种策略生成的；默认是使用keyGenerator生成的，默认使用SimpleKeyGenerator生成key；
+     *          SimpleKeyGenerator生成key的默认策略；
+     *                  如果没有参数；key=new SimpleKey()；
+     *                  如果有一个参数：key=参数的值
+     *                  如果有多个参数：key=new SimpleKey(params)；
+     *   3、没有查到缓存就调用目标方法；
+     *   4、将目标方法返回的结果，放进缓存中
+     *
+     *   @Cacheable标注的方法执行之前先来检查缓存中有没有这个数据，默认按照参数的值作为key去查询缓存，
+     *   如果没有就运行方法并将结果放入缓存；以后再来调用就可以直接使用缓存中的数据；
+     *
+     *   核心：
+     *      1）、使用CacheManager【ConcurrentMapCacheManager】按照名字得到Cache【ConcurrentMapCache】组件
+     *      2）、key使用keyGenerator生成的，默认是SimpleKeyGenerator
+     *
+     *
+     *   几个属性：
+     *      cacheNames/value：指定缓存组件的名字;将方法的返回结果放在哪个缓存中，是数组的方式，可以指定多个缓存；
+     *
+     *      key：缓存数据使用的key；可以用它来指定。默认是使用方法参数的值  1-方法的返回值
+     *              编写SpEL； #i d;参数id的值   #a0  #p0  #root.args[0]
+     *              getEmp[2]
+     *
+     *      keyGenerator：key的生成器；可以自己指定key的生成器的组件id
+     *              key/keyGenerator：二选一使用;
+     *
+     *
+     *      cacheManager：指定缓存管理器；或者cacheResolver指定获取解析器
+     *
+     *      condition：指定符合条件的情况下才缓存；
+     *              ,condition = "#id>0"
+     *          condition = "#a0>1"：第一个参数的值》1的时候才进行缓存
+     *
+     *      unless:否定缓存；当unless指定的条件为true，方法的返回值就不会被缓存；可以获取到结果进行判断
+     *              unless = "#result == null"
+     *              unless = "#a0==2":如果第一个参数的值是2，结果不缓存；
+     *      sync：是否使用异步模式
+     * @param id
+     * @return
+     *
+     */
+    @Cacheable(/*cacheNames = {"emp"}*/, key = "#a0"/*,keyGenerator = "myKeyGenerator",condition = "#a0>1",unless = "#a0==2"*/) // 根据方法的请求参数对其结果进行缓存
+    public Employee findById(Integer id){
+        System.out.println("查询" + id + "号员工");
+        return employeeMapper.findById(id);
+    }
+
+    //更新
+    /**
+     * @CachePut：既调用方法，又更新缓存数据；同步更新缓存
+     * 修改了数据库的某个数据，同时更新缓存；
+     * 运行时机：
+     *  1、先调用目标方法
+     *  2、将目标方法的结果缓存起来
+     *
+     * 测试步骤：
+     *  1、查询1号员工；查到的结果会放在缓存中；
+     *          key：1  value：lastName：张三
+     *  2、以后查询还是之前的结果
+     *  3、更新1号员工；【lastName:zhangsan；gender:0】
+     *          将方法的返回值也放进缓存了；
+     *          key：传入的employee对象  值：返回的employee对象；
+     *  4、查询1号员工？
+     *      应该是更新后的员工；
+     *          key = "#employee.id":使用传入的参数的员工id；
+     *          key = "#result.id"：使用返回后的id
+     *             @Cacheable的key是不能用#result
+     *      为什么是没更新前的？【1号员工没有在缓存中更新】
+     *
+     */
+    @CachePut(/*value="emp"*/ key = "#a0.id")
+    public boolean updateById(Employee employee){
+
+        return 0 != employeeMapper.updateById(employee);
+    }
+
+    //删除
+    /**
+     * @CacheEvict：缓存清除
+     *  key：指定要清除的数据
+     *  allEntries = true：指定清除这个缓存中所有的数据
+     *  beforeInvocation = false：缓存的清除是否在方法之前执行
+     *      默认代表缓存清除操作是在方法执行之后执行;如果出现异常缓存就不会清除
+     *
+     *  beforeInvocation = true：
+     *      代表清除缓存操作是在方法运行之前执行，无论方法是否出现异常，缓存都清除
+     *
+     *
+     */
+    @CacheEvict(/*value="emp"*/ key="#id" /* allEntries=true*/)
+    public boolean deleteById(Integer id){
+        return 0 != employeeMapper.deleteById(id);
+    }
+
+    //添加
+    @CachePut(/*value = "emp"*/, key = "#a0.id")
+    public boolean insertEmp(Employee employee){
+        return 0 != employeeMapper.insertEmp(employee);
+    }
+
+    // @Caching 定义复杂的缓存规则
+    @Caching(
+            cacheable = {
+                    @Cacheable(/*value="emp",*/key = "#lastName")
+            },
+            put = {
+                    @CachePut(/*value="emp",*/key = "#result.id"),
+                    @CachePut(/*value="emp",*/key = "#result.email")
+            }
+    )
+    public Employee getEmpByLastName(String lastName){
+        return employeeMapper.getEmpByLastName(lastName);
+    }
+
+}
+
+```
+
+
+
+- KeyGenerator: key 生成器
+
+```java
+package com.aqqje.cache.config;
+
+import org.springframework.cache.interceptor.KeyGenerator;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.lang.reflect.Method;
+import java.util.Arrays;
+
+@Configuration
+public class CacheCofing {
+
+    // 自定义key生成器
+    @Bean("mykeyGenerator")
+    public KeyGenerator keyGenerator(){
+        return new KeyGenerator(){
+            @Override
+            public Object generate(Object o, Method method, Object... objects) {
+                return method.getName()+ "[" + Arrays.asList(objects).toString() + "]";
+            }
+        };
+    }
+}
+
+// 如何使用
+@Cacheable(cacheNames = {"emp"},keyGenerator = "myKeyGenerator")
+```
+
+
+
+## 5、整合Redis
+
+
+
+### A、引入依赖
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+```
+
+### B、配置 IP 和端口
+
+
+
+```properties
+#配置redis的 Ip 和 端口
+spring.redis.host=127.0.0.1
+spring.redis.port=6379
+```
+
+### C、使用Redis
+
+
+
+```java
+====================================MyRedisConfig=================
+    package com.aqqje.cache.config;
+
+import com.aqqje.cache.bean.Employee;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+
+import java.net.UnknownHostException;
+
+@Configuration
+public class MyRedisConfig {
+
+    /*
+    * json序列化器
+    * */
+    @Bean
+    public RedisTemplate<Object, Employee> jsonRedisTemplate(
+            RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
+        RedisTemplate<Object, Employee> template = new RedisTemplate<>();
+        template.setConnectionFactory(redisConnectionFactory);
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Employee>(Employee.class);
+        template.setDefaultSerializer(jackson2JsonRedisSerializer);
+        return template;
+    }
+}
+
+=========================SpringBootCacheApplicationTests=================
+package com.aqqje.cache;
+
+import com.aqqje.cache.bean.Employee;
+import com.aqqje.cache.mapper.EmployeeMapper;
+import com.aqqje.cache.service.EmployeeService;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class SpringBootCacheApplicationTests {
+
+    @Autowired
+    DataSource dataSource;
+
+    @Autowired
+    EmployeeService employeeService;
+
+    @Autowired
+    RedisTemplate redisTemplate;//k-v都是对象的
+
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;  //操作k-v都是字符串的
+
+    @Autowired
+    RedisTemplate<Object, Employee> jsonRedisTemplate;
+
+    /**
+     * Redis常见的五大数据类型
+     *  String（字符串）、List（列表）、Set（集合）、Hash（散列）、ZSet（有序集合）
+     *  stringRedisTemplate.opsForValue()[String（字符串）]
+     *  stringRedisTemplate.opsForList()[List（列表）]
+     *  stringRedisTemplate.opsForSet()[Set（集合）]
+     *  stringRedisTemplate.opsForHash()[Hash（散列）]
+     *  stringRedisTemplate.opsForZSet()[ZSet（有序集合）]
+     */
+    @Test
+    public void testStringRedisTemplate(){
+        // 给redis保存数据
+        //stringRedisTemplate.opsForValue().append("msg", "aqqje");
+        //String msg = stringRedisTemplate.opsForValue().get("msg");
+        //System.out.println(msg);
+        //stringRedisTemplate.opsForList().leftPush("mylist", "1");
+        stringRedisTemplate.opsForList().leftPush("mylist", "2");
+    }
+
+    // 测试保存对象
+    @Test
+    public void testRedisTemplate(){
+        Employee id = employeeService.findById(4);
+        //redisTemplate.opsForValue().set("emp-01", id);
+
+        //默认如果保存对象，使用jdk序列化机制，序列化后的数据保存到redis中
+        //redisTemplate.opsForValue().set("emp-01",empById);
+        //1、将数据以json的方式保存
+        //(1)自己将对象转为json
+        //(2)redisTemplate默认的序列化规则；改变默认的序列化规则；
+        jsonRedisTemplate.opsForValue().set("emp-01", id);
+    }
+```
+
+
+
+### D、自定义RedesCacheManager
+
+```java
+====================================MyRedisConfig=================  
+@Bean
+    public RedisCacheManager empCacheManger(RedisConnectionFactory redisConnectionFactory){
+        //初始化一个RedisCacheWriter
+        RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory);
+        //设置CacheManager的值序列化方式为Jackson2JsonRedisSerializer
+        Jackson2JsonRedisSerializer<Employee> employeeJackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Employee>(Employee.class);
+        RedisSerializationContext.SerializationPair<Employee> pair = RedisSerializationContext.SerializationPair.fromSerializer(employeeJackson2JsonRedisSerializer);
+        RedisCacheConfiguration defaultCacheConfig=RedisCacheConfiguration.defaultCacheConfig().serializeValuesWith(pair);
+        //设置默认超过期时间是30秒
+        defaultCacheConfig.entryTtl(Duration.ofSeconds(30));
+        //初始化RedisCacheManager
+        RedisCacheManager cacheManager = new RedisCacheManager(redisCacheWriter, defaultCacheConfig);
+        return cacheManager;
+    }
+```
+
+
+
+### E、多个CacheManager使用
+
+```java
+==========================myRedisConfig.java============================
+        /*
+    * json序列化器
+    * */
+    @Bean
+    public RedisTemplate<Object, Employee> empJsonRedisTemplate(
+            RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
+        RedisTemplate<Object, Employee> template = new RedisTemplate<>();
+        template.setConnectionFactory(redisConnectionFactory);
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Employee>(Employee.class);
+        template.setDefaultSerializer(jackson2JsonRedisSerializer);
+        return template;
+    }
+
+    /**
+     * employee json 序列化器
+     *
+     * @Primary：有多个序列化器必须指定其中一个这首要序列化器
+     * @param redisConnectionFactory
+     * @return
+     */
+    @Primary
+    @Bean
+    public RedisCacheManager empCacheManager(RedisConnectionFactory redisConnectionFactory){
+        //初始化一个RedisCacheWriter
+        RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory);
+        //设置CacheManager的值序列化方式为Jackson2JsonRedisSerializer
+        Jackson2JsonRedisSerializer<Employee> Jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Employee>(Employee.class);
+        RedisSerializationContext.SerializationPair<Employee> pair = RedisSerializationContext.SerializationPair.fromSerializer(Jackson2JsonRedisSerializer);
+        RedisCacheConfiguration defaultCacheConfig=RedisCacheConfiguration.defaultCacheConfig().serializeValuesWith(pair);
+        //设置默认超过期时间是30秒
+        defaultCacheConfig.entryTtl(Duration.ofSeconds(30));
+        //初始化RedisCacheManager
+        RedisCacheManager cacheManager = new RedisCacheManager(redisCacheWriter, defaultCacheConfig);
+        return cacheManager;
+    }
+
+    @Bean
+    public RedisTemplate<Object, Department> deptJsonRedisTemplate(
+            RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
+        RedisTemplate<Object, Department> template = new RedisTemplate<>();
+        template.setConnectionFactory(redisConnectionFactory);
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Department>(Department.class);
+        template.setDefaultSerializer(jackson2JsonRedisSerializer);
+        return template;
+    }
+
+    /**
+     * department json 序列化器
+     *
+     * @param redisConnectionFactory
+     * @return
+     */
+    @Bean
+    public RedisCacheManager deptCacheManager(RedisConnectionFactory redisConnectionFactory){
+        //初始化一个RedisCacheWriter
+        RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory);
+        //设置CacheManager的值序列化方式为Jackson2JsonRedisSerializer
+        Jackson2JsonRedisSerializer<Department> Jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Department>(Department.class);
+        RedisSerializationContext.SerializationPair<Department> pair = RedisSerializationContext.SerializationPair.fromSerializer(Jackson2JsonRedisSerializer);
+        RedisCacheConfiguration defaultCacheConfig=RedisCacheConfiguration.defaultCacheConfig().serializeValuesWith(pair);
+        //设置默认超过期时间是30秒
+        defaultCacheConfig.entryTtl(Duration.ofSeconds(30));
+        //初始化RedisCacheManager
+        RedisCacheManager cacheManager = new RedisCacheManager(redisCacheWriter, defaultCacheConfig);
+        return cacheManager;
+    }
+
+==================DepartmentService.java&&EmployeeService.java====================
+    // 分别指定对应的 xxxCacheManager
+    
+    @CacheConfig(cacheNames = {"dept"}, cacheManager = "deptCacheManager" )
+    
+
+    @CacheConfig(cacheNames="emp",cacheManager = "empCacheManager") //抽取缓存的公共配置
+    
+==================SpringBootCacheApplicationTests.java===================
+    
+    // 使用 xxxCacheManager 对缓存进行操作
+    
+    @Qualifier("deptCacheManager")
+    @Autowired
+    RedisCacheManager deptCacheManager;
+
+    @Test
+    public void test1(){
+        Cache cache = deptCacheManager.getCache("dept");
+        Object nativeCache = cache.getNativeCache();
+        System.out.println(cache.getName());
+    }
+```
+
+
+
+# 十、Spring Boot与消息
+
+
+
+## 1、消息服务简介
+
+### A、提升系统异步通信、扩展解耦能力
+
+### B、消息服务中两个重要概念：       
+
+### C、消息代理（message broker）
+
+### D、目的地（destination）
+
+### E、消息队列主要有两种形式的目的地：
+
+- 1.队列（queue）：点对点消息通信（point-to-point）
+- 2.主题（topic）：发布（publish）/订阅（subscribe）消息通信
+
+### F、使用场景
+
+- 异步处理
+
+  ![](images/20180904.png)
+
+- 应用解耦
+
+  ![](images/2018090401.png)
+
+- 流量削峰
+
+  ![](images/2018090402.png)
+
+### G、点对点式:
+
+- 消息发送者发送消息，消息代理将其放入一个队列中，消息接收者从队列中获取消息内容，消息读取后被移出队列
+- 消息只有唯一的发送者和接受者，但并不是说只能有一个接收者
+
+### H、发布订阅式:
+
+- –发送者（发布者）发送消息到主题，多个接收者（订阅者）监听（订阅）这个主题，那么就会在消息到达时同时收到消息
+
+### I、JMS（Java Message Service）JAVA消息服务：
+
+- –基于JVM消息代理的规范。ActiveMQ、HornetMQ是JMS实现
+
+### J、AMQP（Advanced Message Queuing Protocol）
+
+- 高级消息队列协议，也是一个消息代理的规范，兼容JMS
+- RabbitMQ是AMQP的实现
+
+- JMS与AMQP对比
+
+|              | JMS                                                          | AMQP                                                         |
+| ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 定义         | Java   api                                                   | 网络线级协议                                                 |
+| 跨语言       | 否                                                           | 是                                                           |
+| 跨平台       | 否                                                           | 是                                                           |
+| Model        | 提供两种消息模型：   （1）、Peer-2-Peer   （2）、Pub/sub     | 提供了五种消息模型：   （1）、direct   exchange   （2）、fanout   exchange   （3）、topic   change   （4）、headers   exchange   （5）、system   exchange   本质来讲，后四种和JMS的pub/sub模型没有太大差别，仅是在路由机制上做了更详细的划分； |
+| 支持消息类型 | 多种消息类型：   TextMessage   MapMessage   BytesMessage   StreamMessage   ObjectMessage   Message   （只有消息头和属性） | byte[]   当实际应用时，有复杂的消息，可以将消息序列化后发送。 |
+| 综合评价     | JMS   定义了JAVA   API层面的标准；在java体系中，多个client均可以通过JMS进行交互，不需要应用修改代码，但是其对跨平台的支持较差； | AMQP定义了wire-level层的协议标准；天然具有跨平台、跨语言特性。 |
+
+### L、Spring支持
+
+- spring-jms提供了对JMS的支持
+- spring-rabbit提供了对AMQP的支持
+- 需要ConnectionFactory的实现来连接消息代理
+- 提供JmsTemplate、RabbitTemplate来发送消息
+- @JmsListener（JMS）、@RabbitListener（AMQP）注解在方法上监听消息代理发布的消息
+- @EnableJms、@EnableRabbit开启支持
+
+
+
+### M、Spring Boot自动配置
+
+- JmsAutoConfiguration
+- RabbitAutoConfiguration
+
+
+
+## 2、RabbitMQ简介
+
+### A、RabbitMQ
+
+​	是一个由erlang开发的AMQP(Advanved Message Queue Protocol)的开源实现。
+
+### B、核心概念
+
+- Message
+
+  消息，消息是不具名的，它由消息头和消息体组成。消息体是不透明的，而消息头则由一系列的可选属性组成，这些属性包括routing-key（路由键）、priority（相对于其他消息的优先权）、delivery-mode（指出该消息可能需要持久性存储）等。
+
+- Publisher
+
+  消息的生产者，也是一个向交换器发布消息的客户端应用程序。
+
+- Exchange
+
+  交换器，用来接收生产者发送的消息并将这些消息路由给服务器中的队列。
+
+  Exchange有4种类型：direct(默认)，fanout, topic, 和headers，不同类型的Exchange转发消息的策略有所区别
+
+- Queue
+
+  消息队列，用来保存消息直到发送给消费者。它是消息的容器，也是消息的终点。一个消息可投入一个或多个队列。消息一直在队列里面，等待消费者连接到这个队列将其取走。
+
+- Binding
+
+  绑定，用于消息队列和交换器之间的关联。一个绑定就是基于路由键将交换器和消息队列连接起来的路由规则，所以可以将交换器理解成一个由绑定构成的路由表。
+
+  Exchange 和Queue的绑定可以是多对多的关系。
+
+- Connection
+
+  网络连接，比如一个TCP连接。
+
+- Channel
+
+  信道，多路复用连接中的一条独立的双向数据流通道。信道是建立在真实的TCP连接内的虚拟连接，AMQP 命令都是通过信道发出去的，不管是发布消息、订阅队列还是接收消息，这些动作都是通过信道完成。因为对于操作系统来说建立和销毁 TCP 都是非常昂贵的开销，所以引入了信道的概念，以复用一条 TCP 连接。
+
+- Consumer
+
+  消息的消费者，表示一个从消息队列中取得消息的客户端应用程序。
+
+- Virtual Host
+
+  虚拟主机，表示一批交换器、消息队列和相关对象。虚拟主机是共享相同的身份认证和加密环境的独立服务器域。每个 vhost 本质上就是一个 mini 版的 RabbitMQ 服务器，拥有自己的队列、交换器、绑定和权限机制。vhost 是 AMQP 概念的基础，必须在连接时指定，RabbitMQ 默认的 vhost 是  。
+
+- Broker
+
+  表示消息队列服务器实体
+
+  ![](images/201809043.png)
+
+
+
+### C、RabbitMQ运行机制
+
+#### a、MQP 中消息路由
+
+- AMQP 中消息的路由过程和 Java 开发者熟悉的 JMS 存在一些差别，AMQP 中增加了 Exchange 和 Binding 的角	色。生产者把消息发布到 Exchange 上，消息最终到达队列并被消费者接收，而 Binding 决定交换器的消息应该发送到那个队列。
+
+#### b、Exchange类型
+- Exchange分发消息时根据类型的不同分发策略有区别，目前共四种类型：direct、fanout、topic、headers 。headers 匹配 AMQP 消息的 header 而不是路由键， headers 交换器和 direct 交换器完全一致，但性能差很多，目前几乎用不到了，所以直接看另外三种类型：
+
+- direct Exchange : 一对一
+
+  ![](images/201809044.png)
+
+- fanout Exchange：对所有
+
+  ![](images/201809045.png)
+
+- topic Exchange：对匹配
+
+  ![](images/201809046.png)
+
+
+
+
+
+
+
 # 更多SpringBoot整合示例
 
-https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples
+
+
+
+
+
+
