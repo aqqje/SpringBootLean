@@ -204,9 +204,9 @@ public @interface SpringBootApplication {
 @**SpringBootConfiguration**:Spring Boot的配置类；
 
 		标注在某个类上，表示这是一个Spring Boot的配置类；
-
+	
 		@**Configuration**:配置类上来标注这个注解；
-
+	
 			配置类 -----  配置文件；配置类也是容器中的一个组件；@Component
 
 
@@ -222,21 +222,21 @@ public @interface EnableAutoConfiguration {
 ```
 
       	@**AutoConfigurationPackage**：自动配置包
-
-		@**Import**(AutoConfigurationPackages.Registrar.class)：
-
-		Spring的底层注解@Import，给容器中导入一个组件；导入的组件由AutoConfigurationPackages.Registrar.class；
+    
+    	@**Import**(AutoConfigurationPackages.Registrar.class)：
+    
+    	Spring的底层注解@Import，给容器中导入一个组件；导入的组件由AutoConfigurationPackages.Registrar.class；
 
 ==将主配置类（@SpringBootApplication标注的类）的所在包及下面所有子包里面的所有组件扫描到Spring容器；==
 
 	@**Import**(EnableAutoConfigurationImportSelector.class)；
-
+	
 		给容器中导入组件？
-
+	
 		**EnableAutoConfigurationImportSelector**：导入哪些组件的选择器；
-
+	
 		将所有需要导入的组件以全类名的方式返回；这些组件就会被添加到容器中；
-
+	
 		会给容器中导入非常多的自动配置类（xxxAutoConfiguration）；就是给容器中导入这个场景需要的所有组件，并配置好这些组件；	
 
 有了自动配置类，免去了我们手动编写配置注入功能组件等的工作；
@@ -290,15 +290,15 @@ SpringBoot使用一个全局的配置文件，配置文件名是固定的；
 YAML（YAML Ain't Markup Language）
 
 	YAML  A Markup Language：是一个标记语言
-
+	
 	YAML   isn't Markup Language：不是一个标记语言；
 
 标记语言：
 
 	以前的配置文件；大多都使用的是  **xxxx.xml**文件；
-
+	
 	YAML：**以数据为中心**，比json、xml等更适合做配置文件；
-
+	
 	YAML：配置例子
 
 ```yaml
@@ -337,15 +337,15 @@ server:
 #### a、字面量：普通的值（数字，字符串，布尔）
 
 	k: v：字面直接来写；
-
+	
 		字符串默认不用加上单引号或者双引号；
-
+	
 		""：双引号；不会转义字符串里面的特殊字符；特殊字符会作为本身想表示的意思
-
+	
 				name:   "zhangsan \n lisi"：输出；zhangsan 换行  lisi
-
+	
 		''：单引号；会转义特殊字符，特殊字符最终只是一个普通的字符串数据
-
+	
 				name:   ‘zhangsan \n lisi’：输出；zhangsan \n  lisi
 
 
@@ -353,7 +353,7 @@ server:
 #### b、对象、Map（属性和值）（键值对）：
 
 	k: v：在下一行来写对象的属性和值的关系；注意缩进
-
+	
 		对象还是k: v的方式
 
 ```yaml
@@ -598,7 +598,7 @@ spring:
 > 2、命令行：
 >
 > 	java -jar spring-boot-02-config-0.0.1-SNAPSHOT.jar --			spring.profiles.active=dev；
->
+>		
 > 	可以直接在测试的时候，配置传入命令行参数
 >
 > 3、虚拟机参数；
@@ -961,7 +961,7 @@ Negative matches:（没有启动，没有匹配成功的自动配置类）
 > 5、JDBC---数据库驱动；
 >
 > 		写了一个统一的接口层；日志门面（日志的一个抽象层）；logging-abstract.jar；
->
+>		
 > 		给项目中导入具体的日志实现就行了；我们之前的日志框架都是实现的抽象层；
 >
 > 
@@ -1057,9 +1057,9 @@ SpringBoot使用它来做日志功能；
 总结：
 
 	1）、SpringBoot底层也是使用slf4j+logback的方式进行日志记录
-
+	
 	2）、SpringBoot也把其他的日志都替换成了slf4j；
-
+	
 	3）、中间替换包？
 
 ```java
@@ -1074,7 +1074,7 @@ public abstract class LogFactory {
 
 
 	4）、如果我们要引入其他框架？一定要把这个框架的默认日志依赖移除掉？
-
+	
 			Spring框架用的是commons-logging；
 
 ```xml
@@ -1675,7 +1675,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
 原理：
 
 	1）、WebMvcAutoConfiguration是SpringMVC的自动配置类
-
+	
 	2）、在做其他自动配置时会导入；@Import(**EnableWebMvcConfiguration**.class)
 
 ```java
@@ -1700,9 +1700,9 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
 ```
 
 	3）、容器中所有的WebMvcConfigurer都会一起起作用；
-
+	
 	4）、我们的配置类也会被调用；
-
+	
 	效果：SpringMVC的自动配置和我们的扩展配置都会起作用；
 
 ### C、全面接管SpringMVC；
@@ -1774,9 +1774,9 @@ public class WebMvcAutoConfiguration {
 模式：
 
 	1）、SpringBoot在自动配置很多组件的时候，先看容器中有没有用户自己配置的（@Bean、@Component）如果有就用用户配置的，如果没有，才自动配置；如果有些组件可以有多个（ViewResolver）将用户配置的和自己默认的组合起来；
-
+	
 	2）、在SpringBoot中会有非常多的xxxConfigurer帮助我们进行扩展配置
-
+	
 	3）、在SpringBoot中会有很多的xxxCustomizer帮助我们进行定制配置
 
 ## 6、RestfulCRUD
@@ -2472,9 +2472,9 @@ public class BasicErrorController extends AbstractErrorController {
 
 
 	步骤：
-
+	
 		一但系统出现4xx或者5xx之类的错误；ErrorPageCustomizer就会生效（定制错误的响应规则）；就会来到/error请求；就会被**BasicErrorController**处理；
-
+	
 		1）响应页面；去哪个页面是由**DefaultErrorViewResolver**解析得到的；
 
 ```java
@@ -2496,25 +2496,25 @@ protected ModelAndView resolveErrorView(HttpServletRequest request,
 #### a、如何定制错误的页面；**
 
 			**1）、有模板引擎的情况下；error/状态码;** 【将错误页面命名为  错误状态码.html 放在模板引擎文件夹里面的 error文件夹下】，发生此状态码的错误就会来到  对应的页面；
-
+	
 			我们可以使用4xx和5xx作为错误页面的文件名来匹配这种类型的所有错误，精确优先（优先寻找精确的状态码.html）；		
-
+	
 			页面能获取的信息；
-
+	
 				timestamp：时间戳
-
+	
 				status：状态码
-
+	
 				error：错误提示
-
+	
 				exception：异常对象
-
+	
 				message：异常消息
-
+	
 				errors：JSR303数据校验的错误都在这里
-
+	
 			2）、没有模板引擎（模板引擎找不到这个错误页面），静态资源文件夹下找；
-
+	
 			3）、以上都没有错误页面，就是默认来到SpringBoot默认的错误提示页面；
 
 
@@ -2565,9 +2565,9 @@ public class MyExceptionHandler {
 出现错误以后，会来到/error请求，会被BasicErrorController处理，响应出去可以获取的数据是由getErrorAttributes得到的（是AbstractErrorController（ErrorController）规定的方法）；
 
 	1、完全来编写一个ErrorController的实现类【或者是编写AbstractErrorController的子类】，放在容器中；
-
+	
 	2、页面上能用的数据，或者是json返回能用的数据都是通过errorAttributes.getErrorAttributes得到；
-
+	
 			容器中DefaultErrorAttributes.getErrorAttributes()；默认进行数据处理的；
 
 自定义ErrorAttributes
@@ -3042,7 +3042,7 @@ EmbeddedServletContainerFactory containerFactory = getEmbeddedServletContainerFa
 嵌入式Servlet容器：应用打成可执行的jar
 
 		优点：简单、便携；
-
+	
 		缺点：默认不支持JSP、优化定制比较复杂（使用定制器【ServerProperties、自定义EmbeddedServletContainerCustomizer】，自己编写嵌入式Servlet容器的创建工厂【EmbeddedServletContainerFactory】）；
 
 
@@ -3441,7 +3441,7 @@ spring:
 效果：
 
 	默认是用org.apache.tomcat.jdbc.pool.DataSource作为数据源；
-
+	
 	数据源的相关配置都在DataSourceProperties里面；
 
 自动配置原理：
@@ -3895,7 +3895,7 @@ public class HelloCommandLineRunner implements CommandLineRunner {
 starter：
 
 	1、这个场景需要使用到的依赖是什么？
-
+	
 	2、如何编写自动配置
 
 ```java
@@ -4682,7 +4682,7 @@ public class SpringBootCacheApplicationTests {
 
 ### A、RabbitMQ
 
-​	是一个由erlang开发的AMQP(Advanved Message Queue Protocol)的开源实现。
+	是一个由erlang开发的AMQP(Advanved Message Queue Protocol)的开源实现。
 
 ### B、核心概念
 
@@ -4757,7 +4757,171 @@ public class SpringBootCacheApplicationTests {
 
 
 
+### D、RabbitMq安装测试(docker 容器)
 
+- 下载运行
+
+```tex
+docker pull registry.docker-cn.com/library/rabbitmq:3-management  // 下载rabbitmq镜像
+
+docker run --name rabbit -d -p 5672:5672 -p 15672:15672 rabbitmq:3-management // 运行rabbitmq 其中 【5672为消息通信端口】 【15672为rabbit  web 界面端口】
+```
+
+- 消息测试图
+
+![](images/搜狗截图20180905220019.png)
+
+
+
+- 创建交换器
+
+![](images/搜狗截图20180905220752.png)
+
+
+
+- 创建消息队列
+
+![](images/搜狗截图20180905221013.png)
+
+- 为交换器绑定消息队列
+
+![](images/搜狗截图20180905221534.png)
+
+
+
+- 测试
+
+![](images/搜狗截图20180905221643.png)
+
+
+
+## 3、SpringBoot整合rabbitMQ
+
+### A、引入jar包
+
+```xml
+ <dependency>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-starter-amqp</artifactId>
+</dependency>
+```
+
+### B、基于注解开启rabbit模式
+
+```java
+/**
+ * rabbitMq自动配置类：RabbitAutoConfiguration
+ *  1.CachingConnectionFactory：自动配置的连接工厂
+ *  2.RabbitTemplate：关于 rabbitMq 消息的发送和接收
+ *  3.AmqpAdmin：RabbitMQ系统管理功能组件;
+ *      创建和删除 Queue，Exchange，Binding
+ */
+
+@EnableRabbit // 基于注解开启rabbit模式
+@SpringBootApplication
+public class SpringbootRabbitmqApplication
+```
+
+### C、配置rabbitMQ并使用
+
+>  application.properties:
+
+```xml
+# 配置连接端口
+spring.rabbitmq.host=192.168.99.100 
+# 配置 rabbitMq 用户和密码
+spring.rabbitmq.username=guest
+spring.rabbitmq.password=guest
+```
+
+
+
+>  SpringbootRabbitmqApplicationTests：
+
+```java
+package com.aqqje.rabbitmq;
+
+import com.aqqje.rabbitmq.comfig.bean.Book;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class SpringbootRabbitmqApplicationTests {
+
+
+    @Autowired
+    RabbitTemplate rabbitTemplate;
+
+    /**
+     * 单播(点对点)
+     */
+    @Test
+    public void contextLoads() {
+        //Message需要自己构造一个;定义消息体内容和消息头
+        //rabbitTemplate.send(exchage,routeKey,message);
+
+        //object默认当成消息体，只需要传入要发送的对象，自动序列化发送给rabbitmq；
+        //rabbitTemplate.convertAndSend(exchage,routeKey,object);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("msg", "This first messages");
+        map.put("data", "Hello Word");
+        map.put("flag", true);
+        rabbitTemplate.convertAndSend("exchange.direct","aqqje.news", map);
+    }
+
+    /**
+     * 接收消息
+     */
+    @Test
+    public void receive(){
+        Object book = rabbitTemplate.receiveAndConvert("aqqje");
+        System.out.println(book.getClass());
+        System.out.println(book);
+
+    }
+
+    /**
+     * 广播
+     */
+
+    @Test
+    public void fanout(){
+        rabbitTemplate.convertAndSend("exchange.fanout", "", new Book("aqqje", 100));
+    }
+}
+```
+
+### D、配置json序列化器
+
+```java
+package com.aqqje.rabbitmq.comfig;
+
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * 为rabbitMq配置json序列化器
+ */
+@Configuration
+public class MyAmqpConfig {
+
+    @Bean
+    public MessageConverter messageConverter(){
+        return new Jackson2JsonMessageConverter();
+    }
+}
+
+```
 
 
 
