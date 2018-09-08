@@ -1,8 +1,9 @@
 package com.aqqje.rabbitmq;
 
-import com.aqqje.rabbitmq.comfig.bean.Book;
+import com.aqqje.rabbitmq.bean.Book;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +20,37 @@ public class SpringbootRabbitmqApplicationTests {
     @Autowired
     RabbitTemplate rabbitTemplate;
 
+    @Autowired
+    AmqpAdmin amqpAdmin;
+
+    /**
+     * 测试 AmqpAdmin 对rabbitmq的 exchanges, queues, binding
+     */
+    @Test
+    public void testamqpAdmin(){
+        // 创建一个交换器
+        //amqpAdmin.declareExchange(new DirectExchange("aqqje.direct", true, false));
+        //amqpAdmin.declareExchange(new FanoutExchange("aqqje.fanout", true, false));
+        //amqpAdmin.declareExchange(new TopicExchange("aqqje.topic", true, false));
+        // 创建消息队列
+        //amqpAdmin.declareQueue(new Queue("aqqje.emps", true));
+        //amqpAdmin.declareQueue(new Queue("aqqje.news", true));
+        //amqpAdmin.declareQueue(new Queue("aqqje", true));
+        // 为交换器绑定消息队列
+        //amqpAdmin.declareBinding(new Binding("aqqje.emps", Binding.DestinationType.QUEUE, "aqqje.direct", "aqqje.emps", null));
+        //amqpAdmin.declareBinding(new Binding("aqqje.news", Binding.DestinationType.QUEUE, "aqqje.fanout", "aqqje.news", null));
+        //amqpAdmin.declareBinding(new Binding("aqqje", Binding.DestinationType.QUEUE, "aqqje.topic", "aqqje.#", null));
+        //amqpAdmin.declareBinding(new Binding("aqqje.emps", Binding.DestinationType.QUEUE, "aqqje.topic", "aqqje.#", null));
+        //amqpAdmin.declareBinding(new Binding("aqqje.news", Binding.DestinationType.QUEUE, "aqqje.topic", "aqqje.#", null));
+        //amqpAdmin.declareBinding(new Binding("aqqje.news", Binding.DestinationType.QUEUE, "aqqje.topic", "*.aqqje", null));
+
+        //System.out.println("创建完成！");
+
+        // 删除指定的交换器和消息队列
+        //amqpAdmin.deleteExchange("aqqje.fanout");
+        //amqpAdmin.deleteQueue("aqqje.news");
+    }
+
     /**
      * 单播(点对点)
      */
@@ -33,7 +65,7 @@ public class SpringbootRabbitmqApplicationTests {
         map.put("msg", "This first messages");
         map.put("data", "Hello Word");
         map.put("flag", true);
-        rabbitTemplate.convertAndSend("exchange.direct","aqqje.news", map);
+        rabbitTemplate.convertAndSend("aqqje.emps","aqqje.emps", map);
     }
 
     /**
@@ -55,4 +87,7 @@ public class SpringbootRabbitmqApplicationTests {
     public void fanout(){
         rabbitTemplate.convertAndSend("exchange.fanout", "", new Book("aqqje", 100));
     }
+
+
 }
+
