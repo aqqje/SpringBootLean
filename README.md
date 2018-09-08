@@ -5396,6 +5396,219 @@ public class SpringbootTaskApplicationTests {
 
 ```
 
+# 十三、SpringBoot与SpringSecurity
+
+```java
+package com.aqqje.security;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+/**
+ * 1、引入SpringSecurity；
+ * 2、编写SpringSecurity的配置类；
+ * 		@EnableWebSecurity   extends WebSecurityConfigurerAdapter
+ * 3、控制请求的访问权限：
+ * 		configure(HttpSecurity http) {
+ * 		 	http.authorizeRequests().antMatchers("/").permitAll()
+ * 		 		.antMatchers("/level1/**").hasRole("VIP1")
+ * 		}
+ * 4、定义认证规则：
+ * 		configure(AuthenticationManagerBuilder auth){
+ * 		 	auth.inMemoryAuthentication()
+ * 		 		.withUser("zhangsan").password("123456").roles("VIP1","VIP2")
+ * 		}
+ * 5、开启自动配置的登陆功能：
+ * 		configure(HttpSecurity http){
+ * 		 	http.formLogin();
+ * 		}
+ * 6、注销：http.logout();
+ * 7、记住我：Remeberme()；
+ */
+@SpringBootApplication
+public class SprintbootSecurityApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SprintbootSecurityApplication.class, args);
+    }
+}
+
+ 
+```
+
+## A、引入SpringSecurity
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+
+<dependency>
+    <groupId>org.thymeleaf.extras</groupId>
+    <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+</dependency>
+```
+
+
+
+## B、编写PasswordEncoder实现类
+
+```java
+public class MyPasswordEncoder implements PasswordEncoder {
+    @Override
+    public String encode(CharSequence charSequence) {
+        return charSequence.toString();
+    }
+
+    @Override
+    public boolean matches(CharSequence charSequence, String s) {
+        return s.equals(charSequence.toString());
+    }
+}
+
+```
+
+
+
+## C、编写SpringSecurity的配置类
+
+```java
+package com.aqqje.security.config;
+
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@EnableWebSecurity
+public class MySecurityConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        //super.configure(web);
+        //设置静态资源不要拦截
+        //web.ignoring().antMatchers("/js/**","/cs/**","/images/**");
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        //super.configure(http);
+        //定制请求的授权规则
+        http
+            .authorizeRequests()
+                // 放行 /** 下的所有请求
+                .antMatchers("/").permitAll()
+                .antMatchers("/level1/**").hasRole("VIP1")
+                .antMatchers("/level2/**").hasRole("VIP2")
+                .antMatchers("/level3/**").hasRole("VIP3");
+        //开启自动配置的登陆功能，效果，如果没有登陆，没有权限就会来到登陆页面
+        http.formLogin().usernameParameter("user").passwordParameter("pwd").loginPage("/userlogin");
+        //1、/login来到登陆页
+        //2、重定向到/login?error表示登陆失败
+        //3、更多详细规定
+        //4、默认post形式的 /login代表处理登陆
+        //5、一但定制loginPage；那么 loginPage的post请求就是登陆
+
+        //开启自动配置的注销功能。
+        http.logout().logoutSuccessUrl("/");
+        //1、访问 /logout 表示用户注销，清空session
+        //2、注销成功会返回 /login?logout 页面；
+
+        //开启记住我功能
+        http.rememberMe().rememberMeParameter("remember");
+        //登陆成功以后，将cookie发给浏览器保存，以后访问页面带上这个cookie，只要通过检查就可以免登录
+        //点击注销会删除cookie
+
+        //关闭默认的csrf认证
+        //http.csrf().disable();
+    }
+
+    //定义认证规则
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //super.configure(auth);
+        auth.inMemoryAuthentication()
+                //不加.passwordEncoder(new MyPasswordEncoder())
+                //就不是以明文的方式进行匹配，会报错
+                //.withUser("aqqje").password("123456").roles("VIP1", "VIP2")
+
+                .passwordEncoder(new MyPasswordEncoder())
+                .withUser("aqqje").password("123456").roles("VIP1", "VIP2")
+                .and()
+                .passwordEncoder(new MyPasswordEncoder())
+                .withUser("yjgm").password("123456").roles("VIP2", "VIP3")
+                .and()
+                //.passwordEncoder(new MyPasswordEncoder())。
+                //这样，页面提交时候，密码以明文的方式进行匹配。
+                .passwordEncoder(new MyPasswordEncoder())
+                .withUser("tom").password("123456").roles("VIP1", "VIP3");
+    }
+
+}
+```
+
+## D、使用thymeleaf操作数据
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<h1 align="center">欢迎光临武林秘籍管理系统</h1>
+
+<div sec:authorize="!isAuthenticated()">
+	<h2 align="center">游客您好，如果想查看武林秘籍 <a th:href="@{/userlogin}">请登录</a></h2>
+</div>
+<hr>
+<!--
+	isAuthenticated:
+	布尔值，指示当前用户是否已通过身份验证（已登录）。
+-->
+<div sec:authorize="isAuthenticated()">
+	<h2>
+		<span sec:authentication="name"></span>，您好,您的角色有：
+		<span sec:authentication="principal.authorities"></span>
+	</h2>
+	<form th:action="@{/logout}" th:method="post">
+		<input th:type="submit" th:value="注销">
+	</form>
+</div>
+
+<div sec:authorize="hasRole('VIP1')">
+	<h3>普通武功秘籍</h3>
+	<ul>
+		<li><a th:href="@{/level1/1}">罗汉拳</a></li>
+		<li><a th:href="@{/level1/2}">武当长拳</a></li>
+		<li><a th:href="@{/level1/3}">全真剑法</a></li>
+	</ul>
+</div>
+
+<div sec:authorize="hasRole('VIP2')">
+	<h3>高级武功秘籍</h3>
+	<ul>
+		<li><a th:href="@{/level2/1}">太极拳</a></li>
+		<li><a th:href="@{/level2/2}">七伤拳</a></li>
+		<li><a th:href="@{/level2/3}">梯云纵</a></li>
+	</ul>
+</div>
+
+<div sec:authorize="hasRole('VIP3')">
+	<h3>绝世武功秘籍</h3>
+	<ul>
+		<li><a th:href="@{/level3/1}">葵花宝典</a></li>
+		<li><a th:href="@{/level3/2}">龟派气功</a></li>
+		<li><a th:href="@{/level3/3}">独孤九剑</a></li>
+	</ul>
+</div>
+</body>
+</html>
+```
+
+
+
 
 
 # 更多SpringBoot整合示例
