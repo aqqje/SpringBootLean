@@ -5724,9 +5724,126 @@ dubbo.registry.address=zookeeper://192.168.99.100:2181
 
 > 测试
 
-## 2、
+## 2、SpringBoot2 + SpringCloud
 
-## 
+>1.eureka --> 注册中心
+>
+>2.provider-ticket --> 购票服务
+>
+>2.concumer-user --> 消费者购票
+
+### A、eureka
+
+> 1.配置eureka信息
+
+```xml
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: eureka-server
+  client:
+    register-with-eureka: false # 不把自己注册到注册中心
+    fetch-registry: false # 不获取注册中心的信息
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+```
+
+
+
+> 2.开启eurekao服务: @ EurekaService
+
+ ```java
+@EnableEurekaServer
+@SpringBootApplication
+public class EurekaServerApplication {
+ ```
+
+### B、provider-ticket
+
+> 编写服务类
+
+```java
+@Service
+public class TicketService {
+    public String getTicket(){
+        return "《厉害了，我的国！》";
+    }
+}
+```
+
+```java
+@RestController
+public class TicketController {
+
+    @Autowired
+    TicketService ticketService;
+
+    @GetMapping("/ticket")
+    public String getTicket(){
+        return ticketService.getTicket();
+    }
+}
+
+```
+
+> 将服务注册到注册中心
+
+```properties
+server:
+  port: 8082
+spring:
+  application:
+    name: provider-ticket
+eureka:
+  instance:
+    prefer-ip-address: true #注册服务的时候使用服务的ip地址
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+```
+
+### C、concumer-user
+
+> 开启发现服务功能
+
+```java
+@EnableDiscoveryClient // 开启发现服务功能
+@SpringBootApplication
+public class ConsumerUserApplication {
+```
+
+> 使用 RestTemplate 发送 http 服务请求
+
+```
+  @LoadBalanced // 开启负载均衡机制
+    @Bean
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
+    }
+```
+
+> 使用 ticket服务
+
+```java
+package com.aqqje.user.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+@Service
+public class UserService {
+
+    @Autowired
+    RestTemplate restTemplate;
+
+    public String ticket(){
+        String s = restTemplate.getForObject("http://PROVIDER-TICKET/ticket", String.class);
+        return s;
+    }
+}
+```
 
 
 
