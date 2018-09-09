@@ -1012,7 +1012,7 @@ public class HelloWorld {
 
 图示；
 
-![](https://www.slf4j.org/images/concrete-bindings.png)
+![](https://www.slf4j.org/https://github.com/aqqje/SpringBootLearn/raw/master/images/concrete-bindings.png)
 
 
 
@@ -1024,7 +1024,7 @@ public class HelloWorld {
 
 	***统一日志记录，即使是别的框架和我一起统一使用slf4j进行输出？***
 
-![](https://www.slf4j.org/images/legacy.png)  
+![](https://www.slf4j.org/https://github.com/aqqje/SpringBootLearn/raw/master/images/legacy.png)  
 
 #### b、如何让系统中所有的日志都统一到slf4j
 
@@ -1380,7 +1380,7 @@ public class ResourceProperties implements ResourceLoaderAware {
 
 http://www.webjars.org/
 
-![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180203181751.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180203181751.png)
 
 localhost:8080/webjars/jquery/3.3.1/jquery.js
 
@@ -1419,7 +1419,7 @@ localhost:8080/abc ===  去静态资源文件夹里面找abc
 
 JSP、Velocity、Freemarker、Thymeleaf
 
-![](/images/template-engine.png)
+![](/https://github.com/aqqje/SpringBootLearn/raw/master/images/template-engine.png)
 
 
 
@@ -1497,7 +1497,7 @@ public class ThymeleafProperties {
 
 	th：任意html属性；来替换原生属性的值
 
-![](/images/2018-02-04_123955.png)
+![](/https://github.com/aqqje/SpringBootLearn/raw/master/images/2018-02-04_123955.png)
 
 
 
@@ -1826,7 +1826,7 @@ c、在页面使用fmt:message取出国际化内容
 
 a、编写国际化配置文件，抽取页面需要显示的国际化消息
 
-![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180211130721.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180211130721.png)
 
 
 
@@ -1877,7 +1877,7 @@ spring.messages.basename=i18n.login.login
 
 d、去页面获取国际化的值；
 
-![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180211134506.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180211134506.png)
 
 
 
@@ -2361,19 +2361,19 @@ insert的公共片段在div标签中
 
 		1）、浏览器，返回一个默认的错误页面
 
-![](/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180226173408.png)
+![](/https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180226173408.png)
 
   浏览器发送请求的请求头：
 
-![](/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180226180347.png)
+![](/https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180226180347.png)
 
 		2）、如果是其他客户端，默认响应一个json数据
 
-![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180226173527.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180226173527.png)
 
 	
 
-![](images/搜狗截图20180226180504.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/搜狗截图20180226180504.png)
 
 原理：
 
@@ -2588,7 +2588,7 @@ public class MyErrorAttributes extends DefaultErrorAttributes {
 
 最终的效果：响应是自适应的，可以通过定制ErrorAttributes改变需要返回的内容，
 
-![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180228135513.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180228135513.png)
 
 
 
@@ -2596,7 +2596,7 @@ public class MyErrorAttributes extends DefaultErrorAttributes {
 
 SpringBoot默认使用Tomcat作为嵌入式的Servlet容器；
 
-![](C:/Users/Administrator/Desktop/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180301142915.png)
+![](C:/Users/Administrator/Desktop/https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180301142915.png)
 
 
 
@@ -2705,7 +2705,7 @@ public ServletRegistrationBean dispatcherServletRegistration(
 
 ### C、替换为其他嵌入式Servlet容器
 
-![](C:/Users/Administrator/Desktop/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180302114401.png)
+![](C:/Users/Administrator/Desktop/https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180302114401.png)
 
 默认支持：
 
@@ -2835,11 +2835,11 @@ public interface EmbeddedServletContainerFactory {
 }
 ```
 
-![](C:/Users/Administrator/Desktop/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180302144835.png)
+![](C:/Users/Administrator/Desktop/https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180302144835.png)
 
 2）、EmbeddedServletContainer：（嵌入式的Servlet容器）
 
-![](C:/Users/Administrator/Desktop/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180302144910.png)
+![](C:/Users/Administrator/Desktop/https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180302144910.png)
 
 
 
@@ -3111,7 +3111,7 @@ servlet3.0（Spring注解版）：
 
 - 4、每一个WebApplicationInitializer都调用自己的onStartup；
 
-![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180302221835.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180302221835.png)
 
 - 5、相当于我们的SpringBootServletInitializer的类会被创建对象，并执行onStartup方法
 - 6、SpringBootServletInitializer实例执行onStartup的时候会createRootApplicationContext；创建容器
@@ -3211,11 +3211,11 @@ Docker支持将软件编译成一个镜像；然后在镜像中各种软件做�
 
 运行中的这个镜像称为容器，容器启动是非常快速的。
 
-![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145450.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145450.png)
 
 
 
-![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145531.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145531.png)
 
 ## 2、核心概念
 
@@ -3225,7 +3225,7 @@ Docker支持将软件编译成一个镜像；然后在镜像中各种软件做�
 - 4、docker镜像(Images)：软件打包好的镜像；放在docker仓库中；
 - 5、docker容器(Container)：镜像启动后的实例称为一个容器；容器是独立运行的一个或一组应用
 
-![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303165113.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303165113.png)
 
 使用Docker的步骤：
 
@@ -3556,7 +3556,7 @@ public class DruidConfig {
 		</dependency>
 ```
 
-![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180305194443.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180305194443.png)
 
 >  步骤：
 
@@ -3641,7 +3641,7 @@ http://www.mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/
 
 ### A、SpringData简介
 
-![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180306105412.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180306105412.png)
 
 ### B、整合SpringData JPA
 
@@ -3727,9 +3727,9 @@ private void initialize(Object[] sources) {
 }
 ```
 
-![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180306145727.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180306145727.png)
 
-![](images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180306145855.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180306145855.png)
 
 ## 2、运行run方法
 
@@ -4090,7 +4090,7 @@ public class HelloServiceAutoConfiguration {
 > - 2、Cache接口为缓存的组件规范定义，包含缓存的各种操作集合；
 > - 3、Cache接口下Spring提供了各种xxxCache的实现；如RedisCache，EhCacheCache , ConcurrentMapCache等；
 
-![](/images/搜狗截图20180809230305.png)
+![](/https://github.com/aqqje/SpringBootLearn/raw/master/images/搜狗截图20180809230305.png)
 
 
 
@@ -4108,7 +4108,7 @@ public class HelloServiceAutoConfiguration {
 
 
 
-![](images/搜狗截图20180810001615.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/搜狗截图20180810001615.png)
 
 ## 3、Cache SpEL available metadata 
 
@@ -4621,15 +4621,15 @@ public class SpringBootCacheApplicationTests {
 
 - 异步处理
 
-  ![](images/20180904.png)
+  ![](https://github.com/aqqje/SpringBootLearn/raw/master/images/20180904.png)
 
 - 应用解耦
 
-  ![](images/2018090401.png)
+  ![](https://github.com/aqqje/SpringBootLearn/raw/master/images/2018090401.png)
 
 - 流量削峰
 
-  ![](images/2018090402.png)
+  ![](https://github.com/aqqje/SpringBootLearn/raw/master/images/2018090402.png)
 
 ### G、点对点式:
 
@@ -4730,7 +4730,7 @@ public class SpringBootCacheApplicationTests {
 
   表示消息队列服务器实体
 
-  ![](images/201809043.png)
+  ![](https://github.com/aqqje/SpringBootLearn/raw/master/images/201809043.png)
 
 
 
@@ -4745,15 +4745,15 @@ public class SpringBootCacheApplicationTests {
 
 - direct Exchange : 一对一
 
-  ![](images/201809044.png)
+  ![](https://github.com/aqqje/SpringBootLearn/raw/master/images/201809044.png)
 
 - fanout Exchange：对所有
 
-  ![](images/201809045.png)
+  ![](https://github.com/aqqje/SpringBootLearn/raw/master/images/201809045.png)
 
 - topic Exchange：对匹配
 
-  ![](images/201809046.png)
+  ![](https://github.com/aqqje/SpringBootLearn/raw/master/images/201809046.png)
 
 
 
@@ -4769,29 +4769,29 @@ docker run --name rabbit -d -p 5672:5672 -p 15672:15672 rabbitmq:3-management //
 
 - 消息测试图
 
-![](images/搜狗截图20180905220019.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/搜狗截图20180905220019.png)
 
 
 
 - 创建交换器
 
-![](images/搜狗截图20180905220752.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/搜狗截图20180905220752.png)
 
 
 
 - 创建消息队列
 
-![](images/搜狗截图20180905221013.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/搜狗截图20180905221013.png)
 
 - 为交换器绑定消息队列
 
-![](images/搜狗截图20180905221534.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/搜狗截图20180905221534.png)
 
 
 
 - 测试
 
-![](images/搜狗截图20180905221643.png)
+![](https://github.com/aqqje/SpringBootLearn/raw/master/images/搜狗截图20180905221643.png)
 
 
 
@@ -5487,7 +5487,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         //super.configure(web);
         //设置静态资源不要拦截
-        //web.ignoring().antMatchers("/js/**","/cs/**","/images/**");
+        //web.ignoring().antMatchers("/js/**","/cs/**","/https://github.com/aqqje/SpringBootLearn/blob/master/**");
     }
 
     @Override
@@ -5977,11 +5977,7 @@ public class MyHealthIndicators implements HealthIndicator {
 
 
 
-# 更多SpringBoot整合示例
-
-
-
-
+# 十七、[更多SpringBoot整合示例](https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples)
 
 
 
