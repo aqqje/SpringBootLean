@@ -5845,6 +5845,35 @@ public class UserService {
 }
 ```
 
+# 十五、SpringBoot与热部署
+
+> 在开发中我们修改一个Java文件后想看到效果不得不重启应用，这导致大量时间花费，我们希望不重启应用的情况下，程序可以自动部署（热部署）。有以下四种情况，如何能实现热部署。
+
+## 1、模板引擎
+
+- 在Spring Boot中开发情况下禁用模板引擎的cache
+- 页面模板改变ctrl+F9可以重新编译当前页面并生效
+
+## 2、Spring Loaded
+
+Spring官方提供的热部署程序，实现修改类文件的热部署
+
+–下载Spring Loaded（项目地址<https://github.com/spring-projects/spring-loaded>）
+
+–添加运行时参数；
+
+-javaagent:C:/springloaded-1.2.5.RELEASE.jar –noverify
+
+    �
+
+## 3、
+
+## 4、
+
+## 5、
+
+
+
 
 
 # 更多SpringBoot整合示例
