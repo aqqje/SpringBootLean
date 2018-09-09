@@ -5858,21 +5858,122 @@ public class UserService {
 
 Spring官方提供的热部署程序，实现修改类文件的热部署
 
-–下载Spring Loaded（项目地址<https://github.com/spring-projects/spring-loaded>）
+- 下载Spring Loaded（项目地址<https://github.com/spring-projects/spring-loaded>）
 
-–添加运行时参数；
+- 添加运行时参数；
 
--javaagent:C:/springloaded-1.2.5.RELEASE.jar –noverify
+- javaagent:C:/springloaded-1.2.5.RELEASE.jar –noverify
 
-    �
+## 3、JRebel
 
-## 3、
+- 收费的一个热部署软件
+- 安装插件使用即可
 
-## 4、
+## 4、Spring Boot Devtools（推荐）
 
-## 5、
+- 引入依赖
+
+```xml
+<dependency>  
+       <groupId>org.springframework.boot</groupId>  
+       <artifactId>spring-boot-devtools</artifactId>   
+</dependency> 
+
+```
+
+- IDEA使用ctrl+F9
 
 
+
+# 十六、SpringBoot与Spring Actuator【监管】
+
+## 1、文档
+
+ - [官方html文档](https://docs.spring.io/spring-boot/docs/2.0.1.RELEASE/actuator-api//pdf/spring-boot-actuator-web-api.pdf)
+ - [官方ptf文档](https://docs.spring.io/spring-boot/docs/2.0.1.RELEASE/actuator-api//pdf/spring-boot-actuator-web-api.pdf)
+
+- [中文文档](https://blog.csdn.net/alinyua/article/details/80009435)
+
+## 2、Actuator配置
+
+```xml
+========application.properties=======
+```
+
+```properties
+#基于springboot2x
+
+# 暴露出指定的端口(*代表所有)
+#management.endpoints.web.exposure.include=*
+management.endpoints.web.exposure.include=info,health
+# 设置所有端口的基础路径
+management.endpoints.web.base-path=/
+# info 信息
+info.app.id=springboot-actuator
+info.app.version=1.0.0
+
+# 单个使用端口 management.endpoint.[endpoint].enabled=true
+management.endpoint.shutdown.enabled=true
+
+# 通过management.endpoints.enabled-by-default来修改全局端口默认配置,以下示例启用info端点并禁用所有其他端点：
+#management.endpoints.enabled-by-default=false
+management.endpoint.info.enabled=true
+management.endpoint.health.enabled=true
+
+#*在YAML中有特殊的含义，所以如果你想包含（或排除）所有的端点，一定要加引号，如下例所示：
+#management:
+#endpoints:
+#web:
+#exposure:
+#include: '*'
+
+#禁用HTTP端点
+#management.server.port=-1
+
+#自定义管理服务器地址
+management.server.port=8081
+management.server.address=localhost
+
+#Git提交信息
+management.info.git.mode=full
+#端点映射到其他路径
+management.endpoints.web.path-mapping.info=info11
+```
+
+## 3、监控和管理端点 
+
+| 端点名      | 描述                        |
+| ----------- | --------------------------- |
+| autoconfig  | 所有自动配置信息            |
+| auditevents | 审计事件                    |
+| beans       | 所有Bean的信息              |
+| configprops | 所有配置属性                |
+| dump        | 线程状态信息                |
+| env         | 当前环境信息                |
+| health      | 应用健康状况                |
+| info        | 当前应用信息                |
+| metrics     | 应用的各项指标              |
+| mappings    | 应用@RequestMapping映射路径 |
+| shutdown    | 关闭当前应用（默认关闭）    |
+| trace       | 追踪信息（最新的http请求）  |
+
+## 4、自定义HealthIndicator类
+
+```java
+import org.springframework.boot.actuate.health.Health;
+import org.springframework.boot.actuate.health.HealthIndicator;
+import org.springframework.stereotype.Component;
+
+@Component
+public class MyHealthIndicators implements HealthIndicator {
+
+    @Override
+    public Health health() {
+        //return Health.up().build(); 正常
+        return Health.down().withDetail("msg","服务异常").build();
+    }
+}
+```
 
 
 
