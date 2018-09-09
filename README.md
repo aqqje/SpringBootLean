@@ -5435,7 +5435,7 @@ public class SprintbootSecurityApplication {
  
 ```
 
-## A、引入SpringSecurity
+## 1、引入SpringSecurity
 
 ```xml
 <dependency>
@@ -5451,7 +5451,7 @@ public class SprintbootSecurityApplication {
 
 
 
-## B、编写PasswordEncoder实现类
+## 2、编写PasswordEncoder实现类
 
 ```java
 public class MyPasswordEncoder implements PasswordEncoder {
@@ -5470,7 +5470,7 @@ public class MyPasswordEncoder implements PasswordEncoder {
 
 
 
-## C、编写SpringSecurity的配置类
+## 3、编写SpringSecurity的配置类
 
 ```java
 package com.aqqje.security.config;
@@ -5547,7 +5547,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
-## D、使用thymeleaf操作数据
+## 4、使用thymeleaf操作数据
 
 ```html
 <!DOCTYPE html>
@@ -5608,6 +5608,125 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 ```
 
 
+
+#  十四、SpringBoot与分布式
+
+## 1、springBoot(1.5.15)+zookeeper+dubbo
+
+### A、在运程主机安装 zookerper 注册中心（[详情](https://hub.docker.com/_/zookeeper/)）
+
+### B、创建一个生产者-服务【provider-ticket】
+
+> 加入依赖
+
+```xml
+ <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+
+        <!--引入zookeeper的客户端工具-->
+        <!-- https://mvnrepository.com/artifact/com.github.sgroschupf/zkclient -->
+        <dependency>
+            <groupId>com.github.sgroschupf</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>0.1</version>
+        </dependency>
+```
+
+
+
+> 创建ticket服务
+
+```java
+===========================TicketService====================
+public interface TicketService {
+    public String ticket();
+}
+
+===============================TicketServiceImpl====================
+import com.alibaba.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Component;
+
+@Component
+@Service
+public class TicketServiceImpl implements TicketService {
+
+    @Override
+    public String ticket() {
+        return "《厉害了，我的国》";
+    }
+}
+```
+
+> 将服务注册到注册中心
+
+```properties
+dubbo.application.name=provider-ticket
+
+dubbo.registry.address=zookeeper://192.168.99.100:2181
+
+dubbo.scan.base-packages=com.aqqje.ticket.service
+```
+
+### C、创建一个消费者-用户【consumer-user】
+
+> 加入依赖
+
+<dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+
+```xml
+    <!--引入zookeeper的客户端工具-->
+    <!-- https://mvnrepository.com/artifact/com.github.sgroschupf/zkclient -->
+    <dependency>
+        <groupId>com.github.sgroschupf</groupId>
+        <artifactId>zkclient</artifactId>
+        <version>0.1</version>
+    </dependency>
+```
+> 将ticket服务的接口复制到cousumer-user用户下；即 public interface TicketService ;同名同包
+
+> 创建用户消费服务
+
+```java
+package com.aqqje.user;
+
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.aqqje.ticket.service.TicketService;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserService {
+
+    @Reference
+    TicketService ticketService;
+
+    public void hello(){
+        String ticket = ticketService.ticket();
+        System.out.println("买到票：" + ticket);
+    }
+
+}
+```
+
+> 注册到注册中心
+
+```properties
+dubbo.application.name=consumer-user
+
+dubbo.registry.address=zookeeper://192.168.99.100:2181
+```
+
+> 测试
+
+## 2、
+
+## 
 
 
 
